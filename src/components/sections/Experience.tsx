@@ -8,52 +8,103 @@ import {
   useMotionValueEvent,
   MotionValue,
 } from "framer-motion";
-import { experiences } from "@/lib/data";
 
 const MISSIONS = [
   {
+    id: "zero-trust",
+    codename: "ZEROTRUST_MICROSEG",
+    company: "Mission Freelance — client particulier",
+    period: "Avr 2026 — 15 Mai 2026",
+    status: "COMPLETE",
+    clearance: "L4",
+    port: "443/tcp",
+    tags: ["Zero Trust", "Docker Compose", "Authelia", "Wazuh", "NIST SP 800-207", "Pentest"],
+    brief: "Étude comparative architecture périmétrique vs Zero Trust en laboratoire Docker Compose (14 services, 6 réseaux isolés). Modèle PDP/PEP, supervision SIEM et trois campagnes de pentest.",
+    details: [
+      "PDP/PEP avec Nginx + Authelia + lldap selon NIST SP 800-207 — 6 réseaux isolés, 14 services",
+      "Wazuh SIEM — corrélation MITRE ATT&CK (règles 100033, 100046–100049)",
+      "3 campagnes pentest (Nmap, Hydra, ffuf, Nikto) — compromission classique < 2 min, blast radius confiné Zero Trust",
+    ],
+  },
+  {
+    id: "zerogap",
+    codename: "ZEROGAP_GRC_PLATFORM",
+    company: "DataProtect — Casablanca",
+    period: "Nov 2025 — En cours",
+    status: "ACTIVE",
+    clearance: "L4",
+    port: "443/tcp",
+    tags: ["React", "Node.js", "PostgreSQL", "Docker", "ISO 27001", "DNSSI"],
+    brief: "Stage PFE au département GRC de DataProtect (Casablanca). Conception et développement complet de ZeroGap, plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI, de l'analyse des besoins jusqu'à la documentation technique.",
+    details: [
+      "Système d'évaluation automatique de conformité et de maturité SMSI + tableaux de bord interactifs multi-profils",
+      "Workflow de validation des audits, plan d'action correctif et système d'alertes en temps réel",
+      "Architecture React · Node.js · PostgreSQL · Docker — cahier des charges, maquettes et doc technique",
+    ],
+  },
+  {
     id: "flairie",
-    codename: "FLAIRIE / PROJECT_LEAD",
+    codename: "FLAIRIE_LEAD_FRONTEND",
     company: "Neerelab Technology",
     period: "Déc 2025 — En cours",
     status: "ACTIVE",
     clearance: "L4",
     port: "443/tcp",
-    tags: ["Project Lead", "Fullstack", "Agile"],
-    brief: "Lead de projet sur une application collaborative innovante. Architecture, coordination équipe, livraisons sprint.",
+    tags: ["Project Lead", "Frontend", "Scrum", "Architecture", "API REST"],
+    brief: "Project Lead & Développeur Frontend sur Flairie. Encadrement d'une équipe Agile multidisciplinaire (frontend, backend, fonctionnel), pilotage des sprints et participation aux décisions techniques stratégiques.",
+    details: [
+      "Planification Agile/Scrum — backlog, priorisation, livrables, coordination équipe multidisciplinaire",
+      "Décisions techniques stratégiques : architecture, sécurité applicative, qualité du code, API REST",
+      "Développement frontend + supervision proactive des risques et résolution des blocages techniques",
+    ],
   },
   {
     id: "stage-monitoring",
-    codename: "MONITORING_FIREWALL",
-    company: "Neerelab Technology",
+    codename: "SOC_MONITORING_FIREWALL",
+    company: "Neerelab Technology — Rabat",
     period: "Mai 2025 — Nov 2025",
     status: "COMPLETE",
     clearance: "L3",
     port: "8080/tcp",
-    tags: ["Wazuh", "NetXMS", "Firewall", "SIEM"],
-    brief: "Déploiement d'une infrastructure SIEM + monitoring réseau. Configuration firewalling et règles de détection.",
+    tags: ["Wazuh", "NetXMS", "Firewall", "SIEM", "IDS", "SOC"],
+    brief: "Mise en place d'un outil de monitoring pour la protection du parc informatique : gestion de crise, alertes de quarantaine et déploiement de Firewall. Configuration Wazuh SIEM/IDS, supervision NetXMS et durcissement réseau.",
+    details: [
+      "Déploiement Wazuh SIEM — détection d'incidents, centralisation des logs et quarantaines automatisées",
+      "Supervision du parc via NetXMS — monitoring hôtes, services et disponibilité temps réel",
+      "Durcissement réseau — déploiement et configuration du Firewall avec règles IDS/IPS",
+    ],
   },
   {
     id: "stage-api",
-    codename: "API_PLATFORM",
-    company: "Univers Plancher",
+    codename: "API_UNIFIED_PLATFORM",
+    company: "Univers Plancher — Temara",
     period: "Juin 2024 — Juil 2024",
     status: "COMPLETE",
     clearance: "L2",
     port: "3000/tcp",
-    tags: ["API REST", "Spring Boot", "PostgreSQL"],
-    brief: "Conception et développement d'une API REST robuste. Documentation OpenAPI, tests unitaires, déploiement.",
+    tags: ["Angular CLI", "Spring Boot", "API REST", "Admin Module"],
+    brief: "Conception d'une plateforme unifiée pour la documentation, le test et l'administration des APIs. Frontend Angular CLI, backend Spring Boot, module de documentation automatique et espace de test HTTP.",
+    details: [
+      "Développement frontend Angular CLI — visualisation et test des APIs en temps réel",
+      "Backend Spring Boot — gestion des endpoints, authentification et module d'admin (users & rôles)",
+      "Intégration d'un module de documentation automatique et d'un espace de test HTTP",
+    ],
   },
   {
     id: "stage-re7",
     codename: "MOBILE_APP_RE7",
-    company: "ISMAGI",
+    company: "ISMAGI — Rabat",
     period: "Févr 2024 — Mai 2024",
     status: "COMPLETE",
     clearance: "L2",
     port: "5432/tcp",
-    tags: ["Android", "Java", "Firebase"],
-    brief: "Développement application Android collaborative avec authentification Firebase et synchronisation temps réel.",
+    tags: ["Android", "Java", "Firebase", "Firestore", "Mobile Security"],
+    brief: "Développement sécurisé d'une application collaborative de recettes culinaires 'Re7' en Java/Android. Gestion sécurisée des utilisateurs via Firebase avec contrôle des permissions pour garantir confidentialité et intégrité des données.",
+    details: [
+      "Développement mobile Java/Android — interface intuitive et architecture sécurisée",
+      "Gestion sécurisée via Firebase — Authentication, Firestore, règles d'accès et permissions",
+      "Optimisation de la base de données pour un accès rapide et sécurisé aux données partagées",
+    ],
   },
 ];
 
@@ -71,145 +122,152 @@ function MissionSlide({
   const step  = 1 / N;
   const start = index * step;
   const end   = start + step;
+  const p = (frac: number) => start + step * frac;
 
-  const opacity = useTransform(
+  const slideOpacity = useTransform(
     scrollYProgress,
-    [start - step * 0.25, start, end - step * 0.1, end],
+    [start - step * 0.2, start, end - step * 0.1, end],
     [0, 1, 1, 0]
   );
-  const x = useTransform(
+  const slideX = useTransform(
     scrollYProgress,
-    [start - step * 0.35, start, end - step * 0.1, end],
-    [80, 0, 0, -60]
-  );
-  const scale = useTransform(
-    scrollYProgress,
-    [start - step * 0.35, start, end - step * 0.1, end],
-    [0.95, 1, 1, 0.97]
+    [start - step * 0.3, start, end - step * 0.1, end],
+    [70, 0, 0, -50]
   );
 
-  /* Line draw: 0→100% as this slide is centered */
-  const lineScaleX = useTransform(
-    scrollYProgress,
-    [start, end - step * 0.15],
-    [0, 1]
-  );
+  const headerOp  = useTransform(scrollYProgress, [p(0.00), p(0.14)], [0, 1]);
+  const headerY   = useTransform(scrollYProgress, [p(0.00), p(0.14)], [30, 0]);
+  const lineScale = useTransform(scrollYProgress, [p(0.14), p(0.30)], [0, 1]);
+  const metaOp    = useTransform(scrollYProgress, [p(0.22), p(0.36)], [0, 1]);
+  const briefOp   = useTransform(scrollYProgress, [p(0.30), p(0.44)], [0, 1]);
+  const det0Op    = useTransform(scrollYProgress, [p(0.40), p(0.52)], [0, 1]);
+  const det1Op    = useTransform(scrollYProgress, [p(0.50), p(0.62)], [0, 1]);
+  const det2Op    = useTransform(scrollYProgress, [p(0.60), p(0.72)], [0, 1]);
+  const tagsOp    = useTransform(scrollYProgress, [p(0.68), p(0.80)], [0, 1]);
 
-  const isActive = mission.status === "ACTIVE";
-  const missionNum = String(index + 1).padStart(2, "0");
+  const isActive   = mission.status === "ACTIVE";
+  const detailOps  = [det0Op, det1Op, det2Op];
 
   return (
     <motion.div
-      style={{ opacity, x, scale }}
+      style={{ opacity: slideOpacity, x: slideX }}
       className="absolute inset-0 flex items-center px-6 md:px-16 pointer-events-none"
     >
       <div className="max-w-[1400px] mx-auto w-full">
 
-        {/* Top meta line */}
-        <div className="font-mono text-[9px] text-muted/30 uppercase tracking-widest mb-8 flex items-center gap-4">
+        {/* Top meta */}
+        <motion.div
+          style={{ opacity: headerOp, y: headerY }}
+          className="font-mono text-[9px] text-muted/30 uppercase tracking-widest mb-6 flex items-center gap-4"
+        >
           <span>{mission.port}</span>
           <span>·</span>
-          <span>CLEARANCE: {mission.clearance}</span>
+          <span>CLEARANCE {mission.clearance}</span>
           <span>·</span>
-          <span>MISSION {missionNum}/{N}</span>
-        </div>
+          {isActive ? (
+            <motion.span
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ duration: 1.4, repeat: Infinity }}
+              className="text-white"
+            >
+              ● ACTIVE
+            </motion.span>
+          ) : (
+            <span>✓ COMPLETE</span>
+          )}
+        </motion.div>
 
-        {/* Main grid */}
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_420px] gap-12 md:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 lg:gap-16 items-start">
 
-          {/* Left: mission content */}
-          <div className="flex flex-col gap-6">
-            {/* Status badge */}
-            <div className="flex items-center gap-3">
-              {isActive ? (
-                <motion.span
-                  animate={{ opacity: [1, 0.2, 1] }}
-                  transition={{ duration: 1.4, repeat: Infinity }}
-                  className="inline-block w-2 h-2 rounded-full bg-white shrink-0"
-                />
-              ) : (
-                <span className="inline-block w-2 h-2 border border-muted/40 shrink-0" />
-              )}
-              <span className={`font-mono text-[10px] tracking-widest ${isActive ? "text-white" : "text-muted/50"}`}>
-                {mission.status}
-              </span>
-            </div>
-
+          {/* LEFT: main content */}
+          <div className="flex flex-col gap-5">
             {/* Codename */}
-            <div>
-              <p className="font-mono text-[10px] text-muted/40 mb-3 uppercase tracking-widest">
-                Operation codename
-              </p>
-              <h3
-                className="font-display font-black text-white leading-none tracking-tight"
-                style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)" }}
-              >
-                {mission.codename}
-              </h3>
-            </div>
+            <motion.h3
+              style={{ opacity: headerOp, y: headerY, fontSize: "clamp(1.6rem, 4vw, 3.2rem)" }}
+              className="font-display font-black text-white leading-none tracking-tight"
+            >
+              {mission.codename}
+            </motion.h3>
 
-            {/* Separator line — draws as slide enters */}
-            <div className="overflow-hidden h-px bg-dim">
-              <motion.div
-                style={{ scaleX: lineScaleX }}
-                className="origin-left h-full bg-white"
-              />
+            {/* Divider line */}
+            <div className="h-px bg-dim overflow-hidden">
+              <motion.div style={{ scaleX: lineScale }} className="origin-left h-full bg-white" />
             </div>
 
             {/* Company + period */}
-            <div className="font-mono text-[11px] flex items-center gap-6">
+            <motion.div style={{ opacity: metaOp }} className="flex items-center gap-6 font-mono text-[11px]">
               <div>
-                <div className="text-muted/40 text-[9px] uppercase tracking-widest mb-1">Operator</div>
+                <div className="text-muted/30 text-[8px] uppercase tracking-widest mb-0.5">Operator</div>
                 <div className="text-white">{mission.company}</div>
               </div>
-              <div className="w-px h-8 bg-dim" />
+              <div className="w-px h-7 bg-dim" />
               <div>
-                <div className="text-muted/40 text-[9px] uppercase tracking-widest mb-1">Duration</div>
+                <div className="text-muted/30 text-[8px] uppercase tracking-widest mb-0.5">Duration</div>
                 <div className="text-muted">{mission.period}</div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Brief */}
-            <div>
-              <div className="font-mono text-[9px] text-muted/40 uppercase tracking-widest mb-2">Mission Brief</div>
-              <p className="font-mono text-[12px] text-muted leading-relaxed">
-                {mission.brief}
-              </p>
+            <motion.p style={{ opacity: briefOp }} className="font-mono text-[11px] text-muted leading-relaxed">
+              {mission.brief}
+            </motion.p>
+
+            {/* Detail lines */}
+            <div className="space-y-2 mt-1">
+              {detailOps.map((op, i) => (
+                <motion.div
+                  key={i}
+                  style={{ opacity: op }}
+                  className="flex items-start gap-3 font-mono text-[10px]"
+                >
+                  <span className="text-white/20 shrink-0 mt-0.5">›</span>
+                  <span className="text-muted/70">{mission.details[i]}</span>
+                </motion.div>
+              ))}
             </div>
           </div>
 
-          {/* Right: tags terminal block */}
-          <div className="border border-dim p-6 font-mono pointer-events-auto">
-            <div className="text-[9px] text-muted/30 uppercase tracking-widest mb-4">
-              ./scan --target={mission.id} --output=tags
+          {/* RIGHT: terminal block */}
+          <motion.div
+            style={{ opacity: tagsOp }}
+            className="border border-dim p-5 font-mono pointer-events-auto"
+          >
+            <div className="text-[8px] text-muted/30 uppercase tracking-widest mb-4">
+              $ nmap --target={mission.id} -sV
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 mb-5">
               {mission.tags.map((tag, i) => (
-                <div key={tag} className="flex items-center gap-3 text-[11px]">
-                  <span className="text-white/20">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="text-muted/40">›</span>
-                  <span className={`${isActive && i === 0 ? "text-white" : "text-muted/70"}`}>{tag}</span>
+                <div key={tag} className="flex items-center gap-3 text-[10px]">
+                  <span className="text-white/15">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="text-muted/30">›</span>
+                  <span className={isActive && i === 0 ? "text-white" : "text-muted/60"}>{tag}</span>
                 </div>
               ))}
             </div>
-            <div className="mt-6 pt-4 border-t border-dim flex items-center justify-between text-[9px]">
-              <span className="text-muted/30">EXIT CODE</span>
+            <div className="border-t border-dim pt-3 flex items-center justify-between text-[8px]">
+              <span className="text-muted/30">EXIT_CODE</span>
               <span className={isActive ? "text-white" : "text-muted/50"}>
-                {isActive ? "RUNNING" : "0x00 OK"}
+                {isActive ? "RUNNING..." : "0x00 OK"}
               </span>
             </div>
-          </div>
-        </div>
-
-        {/* Bottom index */}
-        <div
-          className="mt-12 font-display font-black text-white/5 leading-none select-none"
-          style={{ fontSize: "clamp(5rem, 14vw, 12rem)" }}
-        >
-          {missionNum}
+          </motion.div>
         </div>
       </div>
     </motion.div>
+  );
+}
+
+function ProgressBar({ activeIdx, scrollYProgress }: { activeIdx: number; scrollYProgress: MotionValue<number> }) {
+  const step = 1 / N;
+  const w = useTransform(
+    scrollYProgress,
+    [activeIdx * step, (activeIdx + 1) * step],
+    ["0%", "100%"]
+  );
+  return (
+    <div className="w-full h-px bg-dim overflow-hidden relative">
+      <motion.div style={{ width: w }} className="absolute left-0 top-0 h-full bg-white" />
+    </div>
   );
 }
 
@@ -226,8 +284,6 @@ export default function Experience() {
     setActiveIdx(Math.min(Math.floor(v * N), N - 1));
   });
 
-  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
   return (
     <div
       ref={containerRef}
@@ -237,18 +293,18 @@ export default function Experience() {
     >
       <div className="sticky top-0 h-screen overflow-hidden">
 
-        {/* Top-left: terminal label */}
+        {/* Top-left */}
         <div className="absolute top-14 left-6 md:left-16 z-20 font-mono text-[10px]">
           <span className="text-muted">root@compromised:~$ </span>
           <span className="text-white">cat /ops/field_log.enc | decrypt</span>
         </div>
 
-        {/* Top-right: section tag */}
+        {/* Top-right */}
         <div className="absolute top-14 right-6 md:right-16 z-20 font-mono text-[10px] text-muted/30 uppercase tracking-widest">
           FIELD_OPERATIONS
         </div>
 
-        {/* Mission slides */}
+        {/* Slides */}
         <div className="relative w-full h-full">
           {MISSIONS.map((mission, i) => (
             <MissionSlide
@@ -260,31 +316,22 @@ export default function Experience() {
           ))}
         </div>
 
-        {/* Bottom: progress bar + mission counter */}
+        {/* Bottom progress */}
         <div className="absolute bottom-8 left-6 md:left-16 right-6 md:right-16 z-20">
-          <div className="flex items-center justify-between font-mono text-[10px] text-muted mb-3">
+          <div className="flex items-center justify-between font-mono text-[10px] text-muted mb-2">
             <span>
               OPERATION{" "}
               <span className="text-white">{String(activeIdx + 1).padStart(2, "0")}</span>
               /{N}
             </span>
-            <span className="text-muted/40">
-              {MISSIONS[activeIdx]?.codename ?? ""}
-            </span>
+            <span className="text-muted/40">{MISSIONS[activeIdx]?.codename ?? ""}</span>
           </div>
-          <div className="w-full h-px bg-dim overflow-hidden relative">
-            <motion.div
-              style={{ width: progressWidth }}
-              className="absolute left-0 top-0 h-full bg-white"
-            />
-          </div>
-          <div className="flex gap-2 mt-3">
+          <ProgressBar activeIdx={activeIdx} scrollYProgress={scrollYProgress} />
+          <div className="flex gap-2 mt-2">
             {MISSIONS.map((_, i) => (
               <div
                 key={i}
-                className={`h-px flex-1 transition-colors duration-300 ${
-                  i <= activeIdx ? "bg-white" : "bg-dim"
-                }`}
+                className={`h-px flex-1 transition-colors duration-300 ${i <= activeIdx ? "bg-white" : "bg-dim"}`}
               />
             ))}
           </div>

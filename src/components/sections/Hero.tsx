@@ -92,10 +92,10 @@ export default function Hero() {
                 {([
                   ["NAME",        "JOELISON JOANNA VONINJOHARY",                "text-white"],
                   ["STATUS",      "● ACTIVE",                                    "text-white"],
-                  ["ROLE",        "Cybersecurity Engineer & Cloud Computing",    "text-white"],
-                  ["INSTITUTION", "ISMAGI — 3e Année",                           "text-muted"],
+                  ["ROLE",        "Cybersecurity Engineer & Cloud Computing",      "text-white"],
+                  ["INSTITUTION", "ISMAGI — 3e Année Cycle Ingénieur",           "text-muted"],
                   ["LOCATION",    "Casablanca, Maroc  [33.5731°N, 7.5898°W]",   "text-muted"],
-                  ["AFFILIATION", "Dataprotect (PFE) · Neerelab Technology",    "text-muted"],
+                  ["AFFILIATION", "DataProtect (PFE) · Neerelab Technology",     "text-muted"],
                 ] as const).map(([key, val, cls]) => (
                   <div key={key} className="grid grid-cols-[130px_1fr] gap-4">
                     <span className="text-muted/60">{key}:</span>

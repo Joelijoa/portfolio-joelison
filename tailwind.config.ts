@@ -16,9 +16,9 @@ const config: Config = {
         subtle: "#1a1a1a",
       },
       fontFamily: {
-        display: ["var(--font-poppins)", "Poppins", "sans-serif"],
-        body: ["var(--font-inter)", "Inter", "sans-serif"],
-        mono: ["'Courier New'", "Courier", "monospace"],
+        display: ["var(--font-jetbrains)", "'JetBrains Mono'", "monospace"],
+        body: ["var(--font-jetbrains)", "'JetBrains Mono'", "monospace"],
+        mono: ["var(--font-jetbrains)", "'JetBrains Mono'", "monospace"],
       },
       animation: {
         "blink": "blink 0.8s step-end infinite",

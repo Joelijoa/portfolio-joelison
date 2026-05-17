@@ -25,6 +25,10 @@ export default function Home() {
 
   const handleEnter = () => setPhase("compromising");
   const handleCompromiseComplete = () => setPhase("portfolio");
+  const handleExit = () => {
+    window.scrollTo({ top: 0 });
+    setPhase("landing");
+  };
 
   return (
     <>
@@ -38,7 +42,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Portfolio is always mounted but visually hidden until phase === portfolio */}
-      {phase === "portfolio" && <Portfolio />}
+      {phase === "portfolio" && <Portfolio onExit={handleExit} />}
     </>
   );
 }
