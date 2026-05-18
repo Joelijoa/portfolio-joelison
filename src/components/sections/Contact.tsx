@@ -87,8 +87,7 @@ const COMMS = [
   { id: "01", label: "EMAIL",   value: contact.email,              href: `mailto:${contact.email}`,                delay: 0   },
   { id: "02", label: "NETWORK", value: "linkedin/joanna-joelison", href: contact.linkedin,                         delay: 160 },
   { id: "03", label: "REPO",    value: "github/Joelijoa",          href: contact.github,                           delay: 320 },
-  { id: "04", label: "TEL",     value: contact.phone,              href: `tel:${contact.phone.replace(/\s/g,"")}`, delay: 480 },
-  { id: "05", label: "COORDS",  value: "Casablanca · 33.57°N",    href: null,                                     delay: 640 },
+  { id: "04", label: "COORDS",  value: "Rabat · 34.02°N",          href: null,                                     delay: 480 },
 ];
 
 function CommRow({ item, active }: { item: typeof COMMS[0]; active: boolean }) {
@@ -300,7 +299,7 @@ export default function Contact({
                 <div>END TRANSMISSION.</div>
                 <div className="text-right">
                   <div>© 2025 JOELISON JOANNA VONINJOHARY</div>
-                  <div className="text-white">CASABLANCA · MAROC · 33.57°N</div>
+                  <div className="text-white">RABAT · MAROC · 34.02°N</div>
                 </div>
               </div>
             </motion.div>

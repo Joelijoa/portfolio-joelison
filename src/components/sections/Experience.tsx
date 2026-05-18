@@ -57,14 +57,14 @@ const MISSIONS: Mission[] = [
   {
     id: "zerogap",
     codename: "ZEROGAP_GRC_PLATFORM",
-    company: "DataProtect — Casablanca",
+    company: "DataProtect — Rabat",
     period: "Nov 2025 — En cours",
     status: "ACTIVE",
     clearance: "L4",
     port: "443/tcp",
     role: "Stagiaire PFE — GRC Developer",
     tags: ["React", "Node.js", "PostgreSQL", "Docker", "ISO 27001", "DNSSI"],
-    brief: "Stage PFE au département GRC de DataProtect (Casablanca). Conception et développement complet de ZeroGap, plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI, de l’analyse des besoins jusqu’à la documentation technique.",
+    brief: "Stage PFE au département GRC de DataProtect (Rabat). Conception et développement complet de ZeroGap, plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI, de l’analyse des besoins jusqu’à la documentation technique.",
     details: [
       "Système d’évaluation automatique de conformité et de maturité SMSI + tableaux de bord interactifs multi-profils",
       "Workflow de validation des audits, plan d’action correctif et système d’alertes en temps réel",

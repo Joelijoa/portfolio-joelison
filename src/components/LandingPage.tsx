@@ -104,10 +104,10 @@ export default function LandingPage({ onEnter }: Props) {
         CLEARANCE L4 &middot; ELEVATED
       </div>
       <div className="fixed bottom-5 left-12 h-6 hidden md:flex items-center font-mono text-[9px] text-white/30 uppercase tracking-widest pointer-events-none">
-        33.57&deg;N &middot; 7.59&deg;W
+        34.02&deg;N &middot; 6.84&deg;W
       </div>
       <div className="fixed bottom-5 right-12 h-6 hidden sm:flex items-center font-mono text-[9px] text-white/30 uppercase tracking-widest pointer-events-none">
-        Casablanca &middot; Maroc
+        Rabat &middot; Maroc
       </div>
 
       {/* Central content */}

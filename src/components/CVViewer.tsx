@@ -6,12 +6,11 @@ import { skillGroups } from "@/lib/data";
 
 const IDENTITY = [
   ["NAME",        "JOELISON JOANNA VONINJOHARY"],
-  ["STATUS",      "● ACTIVE — Searching PFE 6 months"],
+  ["STATUS",      "● ACTIVE — En recherche de premier CDI"],
   ["ROLE",        "Cybersecurity Engineer & Cloud Computing"],
   ["INSTITUTION", "ISMAGI — 3e Année Cycle Ingénieur d'État"],
-  ["LOCATION",    "Casablanca, Maroc  [33.5731°N, 7.5898°W]"],
+  ["LOCATION",    "Rabat, Maroc  [34.0209°N, 6.8417°W]"],
   ["EMAIL",       "joannajoelison.pro@gmail.com"],
-  ["TEL",         "+212 6 94 82 69 89"],
   ["CLEARANCE",   "L4 — ELEVATED"],
 ];
 

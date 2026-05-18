@@ -31,7 +31,7 @@ export const projects: Project[] = [
   {
     id: "zerogap-platform",
     title: "ZeroGap — Plateforme d'Audit GRC",
-    subtitle: "Stage PFE — DataProtect, Casablanca",
+    subtitle: "Stage PFE — DataProtect, Rabat",
     category: "GRC",
     description:
       "Conception et développement complet de ZeroGap, une plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI. Système d'évaluation automatique de maturité SMSI, tableaux de bord interactifs multi-profils, workflow de validation des audits et plan d'action correctif avec alertes temps réel.",
@@ -203,7 +203,7 @@ export const experiences: Experience[] = [
     period: "Nov. 2025 — Mai. 2026",
     current: false,
     description:
-      "Conception et développement complet de ZeroGap au sein du département GRC de DataProtect (Casablanca). Plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI avec évaluation automatique de maturité SMSI, tableaux de bord interactifs et workflow de validation des plans d'action.",
+      "Conception et développement complet de ZeroGap au sein du département GRC de DataProtect (Rabat). Plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI avec évaluation automatique de maturité SMSI, tableaux de bord interactifs et workflow de validation des plans d'action.",
     tags: ["React", "Node.js", "PostgreSQL", "Docker", "ISO 27001", "DNSSI", "GRC"],
   },
   {

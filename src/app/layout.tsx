@@ -13,7 +13,7 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Joelison Joanna | Cybersecurity Engineer",
   description:
-    "Portfolio de Joanna Joelison Voninjohary, etudiante en Cybersecurite & Cloud Computing, 3e annee ISMAGI, Casablanca.",
+    "Portfolio de Joanna Joelison Voninjohary, etudiante en Cybersecurite & Cloud Computing, 3e annee ISMAGI, Rabat.",
   keywords: ["cybersecurite", "pentest", "forensics", "GRC", "ISO 27001", "cloud", "SIEM", "portfolio"],
   authors: [{ name: "Joelison Joanna Voninjohary" }],
   openGraph: {

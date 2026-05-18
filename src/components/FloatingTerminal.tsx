@@ -13,7 +13,7 @@ const ASCII_HEADER: Line[] = [
   { type: "ascii",  text: "█ ██  █   █ █   █ █  ██ █  ██ █   █" },
   { type: "ascii",  text: " ███   ███  █   █ █   █ █   █ █   █" },
   { type: "sep",    text: "────────────────────────────────────" },
-  { type: "output", text: "Cybersecurity Engineer · Casablanca" },
+  { type: "output", text: "Cybersecurity Engineer · Rabat" },
   { type: "output", text: "root@joelison - terminal v1.0" },
   { type: "sep",    text: "" },
   { type: "output", text: "type 'help' for available commands" },
