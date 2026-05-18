@@ -23,8 +23,12 @@
 
 html {
   background: #000;
-  /* Lenis handles smooth scroll — don't double up */
   scroll-behavior: auto;
+  cursor: none;
+}
+
+* {
+  cursor: inherit;
 }
 
 body {
