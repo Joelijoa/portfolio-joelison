@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
-import GlitchBackground from "@/components/GlitchBackground";
+import BinaryRain from "@/components/BinaryRain";
 import CVViewer from "@/components/CVViewer";
 import FloatingTerminal from "@/components/FloatingTerminal";
 import Nav from "@/components/ui/Nav";
@@ -24,12 +24,12 @@ export default function Portfolio({ onExit }: { onExit?: () => void }) {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="min-h-screen bg-black"
       >
-        <GlitchBackground />
+        <BinaryRain dim />
 
-        {/* CV Viewer — accessible from terminal AND contact section */}
+        {/* CV Viewer â€” accessible from terminal AND contact section */}
         <CVViewer open={cvOpen} onClose={() => setCvOpen(false)} />
 
-        {/* Floating terminal — ` to open */}
+        {/* Floating terminal â€” ` to open */}
         <FloatingTerminal
           onOpenCV={() => setCvOpen(true)}
           onExit={onExit}

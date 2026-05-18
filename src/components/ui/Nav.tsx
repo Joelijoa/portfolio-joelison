@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const SECTIONS = [
   { id: "hero", label: "Intro" },
@@ -11,13 +12,15 @@ const SECTIONS = [
 ];
 
 export default function Nav() {
-  const [active, setActive] = useState("hero");
+  const [active,   setActive]   = useState("hero");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [jjVisible, setJjVisible] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
+      setJjVisible(window.scrollY > 400);
 
       const offsets = SECTIONS.map(({ id }) => {
         const el = document.getElementById(id);
@@ -44,13 +47,16 @@ export default function Nav() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-        {/* Logo */}
-        <button
+        {/* Logo — hidden at top, fades in as flying J's arrive */}
+        <motion.button
+          data-jj-logo
+          animate={{ opacity: jjVisible ? 1 : 0 }}
+          transition={{ duration: 0.25 }}
           onClick={() => scrollTo("hero")}
-          className="font-mono text-xs tracking-widest uppercase text-muted hover:text-white transition-colors"
+          className="font-mono text-xs tracking-widest uppercase text-white hover:text-white"
         >
           JJ_
-        </button>
+        </motion.button>
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-8">

@@ -5,20 +5,19 @@ import { motion, AnimatePresence } from "framer-motion";
 
 type Line = { type: "input" | "output" | "error" | "cmd" | "def" | "sep" | "ascii"; text: string };
 
-/* ASCII block art — "Joanna" rendered in a compact block style */
+/* ASCII block art - JOANNA in full-block chars (5 wide per letter, 1-space separator) */
 const ASCII_HEADER: Line[] = [
-  { type: "ascii", text: "  ██╗ ██████╗  █████╗ ███╗  ██╗███╗  ██╗ █████╗ " },
-  { type: "ascii", text: "  ██║██╔═══██╗██╔══██╗████╗ ██║████╗ ██║██╔══██╗" },
-  { type: "ascii", text: "  ██║██║   ██║███████║██╔██╗██║██╔██╗██║███████║" },
-  { type: "ascii", text: "  ██║██║   ██║██╔══██║██║╚████║██║╚████║██╔══██║" },
-  { type: "ascii", text: "  ██║╚██████╔╝██║  ██║██║ ╚███║██║ ╚███║██║  ██║" },
-  { type: "ascii", text: "  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚══╝╚═╝  ╚══╝╚═╝  ╚═╝" },
-  { type: "sep",   text: "  ─────────────────────────────────────────────────" },
-  { type: "output", text: "  Cybersecurity Engineer · Casablanca, Maroc" },
-  { type: "output", text: "  root@compromised — terminal v1.0" },
-  { type: "sep",   text: "" },
-  { type: "output", text: "  type 'help' for available commands" },
-  { type: "sep",   text: "" },
+  { type: "ascii",  text: "  ██   ███   ███  █   █ █   █  ███ " },
+  { type: "ascii",  text: "  ██  █   █ █   █ ██  █ ██  █ █   █" },
+  { type: "ascii",  text: "  ██  █   █ █████ █ █ █ █ █ █ █████" },
+  { type: "ascii",  text: "█ ██  █   █ █   █ █  ██ █  ██ █   █" },
+  { type: "ascii",  text: " ███   ███  █   █ █   █ █   █ █   █" },
+  { type: "sep",    text: "────────────────────────────────────" },
+  { type: "output", text: "Cybersecurity Engineer · Casablanca" },
+  { type: "output", text: "root@joelison - terminal v1.0" },
+  { type: "sep",    text: "" },
+  { type: "output", text: "type 'help' for available commands" },
+  { type: "sep",    text: "" },
 ];
 
 /* Help entries — command + description */
@@ -113,7 +112,7 @@ export default function FloatingTerminal({
       case "help":
       case "man": {
         const helpLines: Line[] = [
-          { type: "sep",    text: "OPERATOR MANUAL — root@compromised v1.0" },
+          { type: "sep",    text: "OPERATOR MANUAL — root@joelison v1.0" },
           { type: "sep",    text: "────────────────────────────────────────────────────" },
           { type: "sep",    text: "" },
         ];
@@ -168,9 +167,9 @@ export default function FloatingTerminal({
           "Role:      Cybersecurity Engineer & Cloud Computing",
           "Status:    ● ACTIVE",
           "Clearance: L4 — ELEVATED",
-          "Location:  Casablanca, Maroc [33.5731°N, 7.5898°W]",
+          "Location:  Rabat, Maroc [34.0209°N, 6.8417°W]",
           "Threat:    ████████░░ ELEVATED",
-          "PFE:       DataProtect — ZeroGap Platform",
+          "Projects:  ZeroGap (GRC) · Flairie (Lead) · Zero Trust Lab",
         ]);
         break;
 
@@ -308,7 +307,7 @@ export default function FloatingTerminal({
     if (line.type === "sep") {
       return (
         <div key={i} className="leading-relaxed min-h-[0.6em]">
-          <span className="font-mono text-[9px] text-white/25 whitespace-pre">{line.text}</span>
+          <span className="font-mono text-[9px] text-white whitespace-pre">{line.text}</span>
         </div>
       );
     }
@@ -324,20 +323,20 @@ export default function FloatingTerminal({
     if (line.type === "def") {
       return (
         <div key={i} className="leading-relaxed min-h-[1em]">
-          <span className="font-mono text-[9px] text-white/55 whitespace-pre">{line.text}</span>
+          <span className="font-mono text-[9px] text-white whitespace-pre">{line.text}</span>
         </div>
       );
     }
     return (
       <div key={i} className="flex gap-2 leading-relaxed min-h-[1em]">
         {line.type === "input" && (
-          <span className="font-mono text-[9px] text-white/30 shrink-0">›</span>
+          <span className="font-mono text-[9px] text-white shrink-0">›</span>
         )}
         <span
           className={`font-mono text-[9px] break-all ${
-            line.type === "input" ? "text-white/80" :
-            line.type === "error" ? "text-white/35 italic" :
-            "text-white/50"
+            line.type === "input" ? "text-white" :
+            line.type === "error" ? "text-white italic" :
+            "text-white"
           }`}
         >
           {line.text}
@@ -352,7 +351,7 @@ export default function FloatingTerminal({
       <button
         onClick={() => setOpen((v) => !v)}
         title="Press ` (backtick) to toggle terminal"
-        className="fixed bottom-6 right-6 z-40 font-mono text-[9px] border border-white/20 hover:border-white/50 text-white/40 hover:text-white/70 px-3 py-1.5 bg-black transition-all duration-150 uppercase tracking-widest"
+        className="fixed bottom-6 right-6 z-40 font-mono text-[9px] border border-white/20 hover:border-white/50 text-white hover:text-white px-3 py-1.5 bg-black transition-all duration-150 uppercase tracking-widest"
       >
         {open ? "[×] CLOSE" : "[~] TERMINAL"}
       </button>
@@ -376,11 +375,11 @@ export default function FloatingTerminal({
                   transition={{ duration: 1.5, repeat: Infinity }}
                   className="w-1.5 h-1.5 rounded-full bg-white/50 inline-block shrink-0"
                 />
-                <span className="font-mono text-[9px] text-white/40 uppercase tracking-widest">
-                  root@compromised — /ops/portfolio
+                <span className="font-mono text-[9px] text-white uppercase tracking-widest">
+                  root@joelison — /ops/portfolio
                 </span>
               </div>
-              <span className="font-mono text-[8px] text-white/15">` to toggle · tab autocomplete</span>
+              <span className="font-mono text-[8px] text-white">` to toggle · tab autocomplete</span>
             </div>
 
             {/* Output — scrollable */}
@@ -394,7 +393,7 @@ export default function FloatingTerminal({
 
             {/* Input */}
             <div className="border-t border-white/10 px-3 py-2 flex items-center gap-2 shrink-0">
-              <span className="font-mono text-[10px] text-white/40 shrink-0">$</span>
+              <span className="font-mono text-[10px] text-white shrink-0">$</span>
               <input
                 ref={inputRef}
                 type="text"

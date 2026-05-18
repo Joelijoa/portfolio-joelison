@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d0d0d"/>
+      <stop offset="100%" stop-color="#111"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="32" height="32" rx="5" fill="url(#bg)"/>
+
+  <!-- Border -->
+  <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="4.5"
+        fill="none" stroke="#4ade80" stroke-width="0.8" stroke-opacity="0.35"/>
+
+  <!-- Top-left dot — terminal feel -->
+  <circle cx="5.5" cy="5.5" r="1.3" fill="#4ade80" opacity="0.5"/>
+
+  <!-- Divider line under dot -->
+  <line x1="0.75" y1="9" x2="31.25" y2="9"
+        stroke="#4ade80" stroke-width="0.4" stroke-opacity="0.2"/>
+
+  <!-- >_ text with glow -->
+  <text
+    x="16"
+    y="24"
+    font-family="'Courier New', Courier, monospace"
+    font-size="13"
+    font-weight="bold"
+    fill="#4ade80"
+    text-anchor="middle"
+    filter="url(#glow)"
+  >&#62;_</text>
+</svg>

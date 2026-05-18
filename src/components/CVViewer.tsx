@@ -44,9 +44,9 @@ function Section({ title, children, delay }: { title: string; children: React.Re
       className="mb-8"
     >
       <div className="flex items-center gap-3 mb-3">
-        <div className="h-px flex-1 bg-white/10" />
-        <span className="font-mono text-[9px] text-white/40 uppercase tracking-[0.2em]">{title}</span>
-        <div className="h-px flex-1 bg-white/10" />
+        <div className="h-px flex-1 bg-blue-400/30" />
+        <span className="font-mono text-[9px] text-blue-400 uppercase tracking-[0.2em]">{title}</span>
+        <div className="h-px flex-1 bg-blue-400/30" />
       </div>
       {children}
     </motion.div>
@@ -57,9 +57,14 @@ export default function CVViewer({ open, onClose }: { open: boolean; onClose: ()
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!open) return;
+    window.dispatchEvent(new Event("lenis:stop"));
     const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    if (open) window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    window.addEventListener("keydown", handler);
+    return () => {
+      window.dispatchEvent(new Event("lenis:start"));
+      window.removeEventListener("keydown", handler);
+    };
   }, [open, onClose]);
 
   /* Reset scroll on open */
@@ -92,16 +97,16 @@ export default function CVViewer({ open, onClose }: { open: boolean; onClose: ()
           {/* ── Header ── */}
           <div className="shrink-0 border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <span className="text-[9px] border border-white/50 text-white/70 px-2 py-0.5 uppercase tracking-widest">
+              <span className="text-[9px] border border-white/50 text-white px-2 py-0.5 uppercase tracking-widest">
                 ★ CLASSIFIED
               </span>
-              <span className="font-mono text-[9px] text-white/30">
+              <span className="font-mono text-[9px] text-white">
                 PERSONNEL FILE — 0x4A4A56F3 · CLEARANCE L4
               </span>
             </div>
             <button
               onClick={onClose}
-              className="font-mono text-[9px] text-white/40 hover:text-white transition-colors uppercase tracking-widest border border-white/10 hover:border-white/40 px-3 py-1"
+              className="font-mono text-[9px] text-white hover:text-white transition-colors uppercase tracking-widest border border-white/10 hover:border-white/40 px-3 py-1"
             >
               [ESC] CLOSE
             </button>
@@ -114,17 +119,17 @@ export default function CVViewer({ open, onClose }: { open: boolean; onClose: ()
             transition={{ delay: 0.1 }}
             className="shrink-0 px-6 md:px-12 py-3 border-b border-white/5 font-mono text-[9px]"
           >
-            <span className="text-white/30">root@compromised:~$ </span>
+            <span className="text-green-400">root@joelison:~$ </span>
             <span className="text-white/60">cat /db/personnel/0x4A4A56F3.enc | decrypt --key=sys</span>
             <br />
-            <span className="text-white/30">Decrypting... </span>
-            <span className="text-white/70">DONE</span>
-            <span className="text-white/30"> · Access </span>
-            <span className="text-white/70">GRANTED</span>
+            <span className="text-white">Decrypting... </span>
+            <span className="text-white">DONE</span>
+            <span className="text-white"> · Access </span>
+            <span className="text-white">GRANTED</span>
           </motion.div>
 
           {/* ── Scrollable body ── */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto px-6 md:px-12 py-6">
+          <div ref={scrollRef} className="flex-1 overflow-y-auto px-6 md:px-12 py-6" onWheel={(e) => e.stopPropagation()} onTouchMove={(e) => e.stopPropagation()}>
 
             {/* IDENTITY */}
             <Section title="IDENTITY" delay={0.2}>
@@ -137,8 +142,8 @@ export default function CVViewer({ open, onClose }: { open: boolean; onClose: ()
                     transition={{ delay: 0.25 + i * 0.04 }}
                     className="grid grid-cols-[140px_1fr] gap-3 font-mono text-[10px]"
                   >
-                    <span className="text-white/30">{key}:</span>
-                    <span className={key === "STATUS" ? "text-white" : "text-white/80"}>{val}</span>
+                    <span className="text-white">{key}:</span>
+                    <span className={key === "STATUS" ? "text-white" : "text-white"}>{val}</span>
                   </motion.div>
                 ))}
               </div>
@@ -155,8 +160,8 @@ export default function CVViewer({ open, onClose }: { open: boolean; onClose: ()
                     transition={{ delay: 0.55 + i * 0.06 }}
                     className="flex flex-wrap gap-x-3 gap-y-0.5 font-mono text-[10px]"
                   >
-                    <span className="text-white/30 w-44 shrink-0">{g.category}:</span>
-                    <span className="text-white/70 flex-1">{g.skills.join(", ")}</span>
+                    <span className="text-white w-44 shrink-0">{g.category}:</span>
+                    <span className="text-white flex-1">{g.skills.join(", ")}</span>
                   </motion.div>
                 ))}
               </div>
@@ -173,15 +178,15 @@ export default function CVViewer({ open, onClose }: { open: boolean; onClose: ()
                     transition={{ delay: 0.85 + i * 0.07 }}
                     className="flex items-center gap-3 font-mono text-[10px] border-b border-white/5 pb-1.5 last:border-0"
                   >
-                    <span className="text-white/20">[{op.code}]</span>
-                    <span className={`font-bold ${op.status === "ACTIVE" ? "text-white" : "text-white/50"}`}>
+                    <span className="text-white">[{op.code}]</span>
+                    <span className={`font-bold ${op.status === "ACTIVE" ? "text-white" : "text-white"}`}>
                       {op.name}
                     </span>
-                    <span className="text-white/25 hidden sm:inline">·</span>
-                    <span className="text-white/40 hidden sm:inline">{op.company}</span>
-                    <span className="text-white/20 hidden md:inline">·</span>
-                    <span className="text-white/30 hidden md:inline">{op.period}</span>
-                    <span className="ml-auto text-[8px] text-white/30 shrink-0">{op.status}</span>
+                    <span className="text-white hidden sm:inline">·</span>
+                    <span className="text-white hidden sm:inline">{op.company}</span>
+                    <span className="text-white hidden md:inline">·</span>
+                    <span className="text-white hidden md:inline">{op.period}</span>
+                    <span className="ml-auto text-[8px] text-white shrink-0">{op.status}</span>
                   </motion.div>
                 ))}
               </div>
@@ -198,9 +203,9 @@ export default function CVViewer({ open, onClose }: { open: boolean; onClose: ()
                     transition={{ delay: 1.25 + i * 0.06 }}
                     className="flex items-center gap-2 font-mono text-[9px] border border-white/5 px-3 py-2"
                   >
-                    <span className="text-white/20">{p.code}</span>
-                    <span className="text-white/65 flex-1 truncate">{p.name}</span>
-                    <span className="text-white/20 text-[8px] shrink-0">{p.cat}</span>
+                    <span className="text-white">{p.code}</span>
+                    <span className="text-white flex-1 truncate">{p.name}</span>
+                    <span className="text-white text-[8px] shrink-0">{p.cat}</span>
                   </motion.div>
                 ))}
               </div>
@@ -215,8 +220,8 @@ export default function CVViewer({ open, onClose }: { open: boolean; onClose: ()
                   ["Allemand", "A1/A2/B1"],
                 ].map(([lang, lvl]) => (
                   <div key={lang} className="flex items-center gap-2">
-                    <span className="text-white/30">{lang}:</span>
-                    <span className="text-white/70">{lvl}</span>
+                    <span className="text-white">{lang}:</span>
+                    <span className="text-white">{lvl}</span>
                   </div>
                 ))}
               </div>
@@ -227,20 +232,20 @@ export default function CVViewer({ open, onClose }: { open: boolean; onClose: ()
 
           {/* ── Footer ── */}
           <div className="shrink-0 border-t border-white/10 px-6 md:px-12 py-3 flex items-center justify-between gap-4">
-            <span className="font-mono text-[8px] text-white/20">
+            <span className="font-mono text-[8px] text-white">
               FILE: 0x4A4A56F3 · SYS: COMPROMISED · ACCESS: ROOT
             </span>
             <div className="flex items-center gap-3">
               <a
                 href="/cv.pdf"
                 download
-                className="font-mono text-[9px] border border-white/30 text-white/70 hover:border-white hover:text-white transition-all px-4 py-1.5 uppercase tracking-widest"
+                className="font-mono text-[9px] border border-white/30 text-white hover:border-white hover:text-white transition-all px-4 py-1.5 uppercase tracking-widest"
               >
                 [↓] DOWNLOAD ORIGINAL
               </a>
               <button
                 onClick={onClose}
-                className="font-mono text-[9px] text-white/30 hover:text-white/60 transition-colors uppercase tracking-widest"
+                className="font-mono text-[9px] text-white hover:text-white transition-colors uppercase tracking-widest"
               >
                 CLOSE VIEWER
               </button>

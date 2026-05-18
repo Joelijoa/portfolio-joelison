@@ -33,7 +33,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
           <div className="flex items-center gap-2 flex-wrap mb-2">
-            <span className="text-[10px] font-mono uppercase tracking-widest border border-dim text-muted px-2 py-0.5">
+            <span className="text-[10px] font-mono uppercase tracking-widest border border-dim text-white px-2 py-0.5">
               {categoryLabel[project.category]}
             </span>
             {project.featured && (
@@ -45,25 +45,25 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           <h3 className="font-display font-bold text-xl text-white leading-tight">
             {project.title}
           </h3>
-          <p className="text-muted text-xs font-mono mt-1">{project.subtitle}</p>
+          <p className="text-white text-xs font-mono mt-1">{project.subtitle}</p>
         </div>
         {project.period && (
-          <span className="text-[10px] text-muted font-mono shrink-0 mt-1 text-right leading-relaxed">
+          <span className="text-[10px] text-white font-mono shrink-0 mt-1 text-right leading-relaxed">
             {project.period}
           </span>
         )}
       </div>
 
       {/* Description */}
-      <p className="text-[0.875rem] text-muted leading-relaxed font-body flex-1">
+      <p className="text-[0.875rem] text-white leading-relaxed font-body flex-1">
         {project.description}
       </p>
 
       {/* Highlights */}
       <ul className="space-y-1.5">
         {project.highlights.map((h, i) => (
-          <li key={i} className="flex items-start gap-2 text-xs text-muted font-mono">
-            <span className="text-white/50 mt-0.5 shrink-0">›</span>
+          <li key={i} className="flex items-start gap-2 text-xs text-white font-mono">
+            <span className="text-white mt-0.5 shrink-0">›</span>
             <span>{h}</span>
           </li>
         ))}
@@ -74,7 +74,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         {project.stack.map((s) => (
           <span
             key={s}
-            className="text-[10px] font-mono text-muted border border-dim px-2 py-0.5 hover:border-white hover:text-white transition-all duration-200"
+            className="text-[10px] font-mono text-white border border-dim px-2 py-0.5 hover:border-white hover:text-white transition-all duration-200"
           >
             {s}
           </span>

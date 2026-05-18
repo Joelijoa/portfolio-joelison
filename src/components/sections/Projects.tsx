@@ -38,21 +38,21 @@ function OperationCard({ project, index }: { project: Project; index: number }) 
       {/* ── File header ── */}
       <div className="border-b border-dim px-7 py-4 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
-          <span className="text-[9px] border border-white/60 text-white/80 px-1.5 py-0.5 uppercase tracking-widest">
+          <span className="text-[9px] border border-white/60 text-white px-1.5 py-0.5 uppercase tracking-widest">
             [{classification}]
           </span>
           {project.featured && (
-            <span className="text-[9px] border border-white text-white px-1.5 py-0.5 uppercase tracking-widest">
+            <span className="text-[9px] border border-white/60 text-white px-1.5 py-0.5 uppercase tracking-widest">
               ★ PRIORITY
             </span>
           )}
         </div>
-        <span className="text-[10px] text-muted/50">{opId}</span>
+        <span className="text-[10px] text-white">{opId}</span>
       </div>
 
       {/* ── File path ── */}
       <div className="px-7 py-2 border-b border-dim/40 shrink-0">
-        <span className="text-[9px] text-muted/30">
+        <span className="text-[9px] text-white">
           /root/ops/{project.id}/{project.id.replace(/-/g, "_")}.enc
         </span>
       </div>
@@ -62,33 +62,33 @@ function OperationCard({ project, index }: { project: Project; index: number }) 
 
         {/* Operation name */}
         <div>
-          <div className="text-[9px] text-muted/50 uppercase tracking-widest mb-1">Operation:</div>
+          <div className="text-[9px] text-white uppercase tracking-widest mb-1">Operation:</div>
           <h3
             className="font-display font-black text-white leading-tight transition-all duration-500"
             style={{ fontSize: hovered ? "clamp(1.5rem, 3.2vw, 2.2rem)" : "clamp(1.25rem, 2.8vw, 1.9rem)" }}
           >
             {project.title.toUpperCase()}
           </h3>
-          <p className="text-[10px] text-muted/60 mt-1">{project.subtitle}</p>
+          <p className="text-[10px] text-white mt-1">{project.subtitle}</p>
         </div>
 
         {/* Mission brief */}
         <div className="flex-1">
-          <div className="text-[9px] text-muted/50 uppercase tracking-widest mb-2">Mission Brief:</div>
-          <p className="text-[11px] text-muted leading-relaxed line-clamp-4">
+          <div className="text-[9px] text-white uppercase tracking-widest mb-2">Mission Brief:</div>
+          <p className="text-[11px] text-white leading-relaxed line-clamp-4">
             {project.description}
           </p>
         </div>
 
         {/* Threat vectors addressed */}
         <div>
-          <div className="text-[9px] text-muted/50 uppercase tracking-widest mb-2">
+          <div className="text-[9px] text-white uppercase tracking-widest mb-2">
             Threat Vectors Addressed:
           </div>
           <ul className="space-y-1">
             {project.highlights.slice(0, 3).map((h, i) => (
-              <li key={i} className="text-[10px] text-muted/70 flex items-start gap-2">
-                <span className="text-white/20 shrink-0 mt-0.5">&gt;</span>
+              <li key={i} className="text-[10px] text-white flex items-start gap-2">
+                <span className="text-white shrink-0 mt-0.5">&gt;</span>
                 <span className="line-clamp-1">{h}</span>
               </li>
             ))}
@@ -97,14 +97,14 @@ function OperationCard({ project, index }: { project: Project; index: number }) 
 
         {/* Tools deployed */}
         <div>
-          <div className="text-[9px] text-muted/50 uppercase tracking-widest mb-2">
+          <div className="text-[9px] text-white uppercase tracking-widest mb-2">
             Tools Deployed:
           </div>
           <div className="flex flex-wrap gap-1.5">
             {project.stack.slice(0, 6).map((s) => (
               <span
                 key={s}
-                className="text-[9px] text-muted/70 border border-dim/60 px-2 py-0.5 hover:border-white/40 transition-colors"
+                className="text-[9px] text-white border border-dim/60 px-2 py-0.5 hover:border-white/40 hover:text-white transition-colors"
               >
                 {s}
               </span>
@@ -115,7 +115,7 @@ function OperationCard({ project, index }: { project: Project; index: number }) 
 
       {/* ── Priority bar ── */}
       <div className="px-7 py-3 border-t border-dim/40 shrink-0">
-        <div className="flex items-center justify-between text-[9px] text-muted/50 mb-1.5">
+        <div className="flex items-center justify-between text-[9px] text-white mb-1.5">
           <span>PRIORITY LEVEL</span>
           <span>{priority}%</span>
         </div>
@@ -139,13 +139,13 @@ function OperationCard({ project, index }: { project: Project; index: number }) 
               className="inline-block w-1.5 h-1.5 rounded-full bg-white shrink-0"
             />
             <span className="text-[10px] text-white">ACTIVE</span>
-            <span className="text-[10px] text-muted">— {project.company}</span>
+            <span className="text-[10px] text-white">— {project.company}</span>
           </>
         ) : (
-          <span className="text-[10px] text-muted/60">✓ OPERATION COMPLETE</span>
+          <span className="text-[10px] text-white">✓ OPERATION COMPLETE</span>
         )}
         {project.period && (
-          <span className="ml-auto text-[9px] text-muted/30">{project.period}</span>
+          <span className="ml-auto text-[9px] text-white">{project.period}</span>
         )}
       </div>
 
@@ -207,23 +207,23 @@ export default function Projects() {
         {/* Section header */}
         <motion.div
           style={{ opacity: headerOpacity, y: headerY }}
-          className="px-6 md:px-12 mb-8 shrink-0"
+          className="px-6 md:px-12 pt-6 mb-8 shrink-0"
         >
           <div className="flex items-end justify-between">
             <div>
-              <p className="font-mono text-[10px] text-muted mb-1">
-                <span className="text-muted/40">root@compromised:~$ </span>
-                <span className="text-white/60">ls -la /root/ops/exfiltrated/</span>
+              <p className="font-mono text-[10px] mb-1">
+                <span className="text-green-400">root@joelison:~$ </span>
+                <span className="text-white/50">ls -la /root/ops/exfiltrated/</span>
               </p>
               <h2
                 className="font-display font-black leading-none tracking-tight"
                 style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)" }}
               >
                 EXFILTRATED
-                <span className="text-muted">_DATA/</span>
+                <span className="text-white">_DATA/</span>
               </h2>
             </div>
-            <div className="hidden md:block font-mono text-[10px] text-muted/50 pb-1 text-right">
+            <div className="hidden md:block font-mono text-[10px] text-white pb-1 text-right">
               <div>{projects.length} files found</div>
               <div>SORTED BY: priority desc</div>
             </div>
@@ -250,7 +250,7 @@ export default function Projects() {
               className="absolute left-0 top-0 h-full bg-white"
             />
           </div>
-          <span className="font-mono text-[9px] text-muted/60 shrink-0 uppercase tracking-widest">
+          <span className="font-mono text-[9px] text-white shrink-0 uppercase tracking-widest">
             Scrolling files →
           </span>
         </div>

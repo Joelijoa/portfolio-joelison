@@ -12,6 +12,11 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
       infinite: false,
     });
 
+    const handleStop  = () => lenis.stop();
+    const handleStart = () => lenis.start();
+    window.addEventListener("lenis:stop",  handleStop);
+    window.addEventListener("lenis:start", handleStart);
+
     let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
@@ -20,6 +25,8 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
     rafId = requestAnimationFrame(raf);
 
     return () => {
+      window.removeEventListener("lenis:stop",  handleStop);
+      window.removeEventListener("lenis:start", handleStart);
       cancelAnimationFrame(rafId);
       lenis.destroy();
     };

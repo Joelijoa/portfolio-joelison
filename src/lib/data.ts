@@ -197,11 +197,11 @@ export const experiences: Experience[] = [
   },
   {
     id: "zerogap",
-    role: "Stage PFE — Développement Plateforme GRC",
+    role: "Développeur Full-Stack — Plateforme GRC",
     project: "ZeroGap Platform",
     company: "DataProtect",
-    period: "Nov. 2025 — En cours",
-    current: true,
+    period: "Nov. 2025 — Mai. 2026",
+    current: false,
     description:
       "Conception et développement complet de ZeroGap au sein du département GRC de DataProtect (Casablanca). Plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI avec évaluation automatique de maturité SMSI, tableaux de bord interactifs et workflow de validation des plans d'action.",
     tags: ["React", "Node.js", "PostgreSQL", "Docker", "ISO 27001", "DNSSI", "GRC"],
@@ -254,5 +254,5 @@ export const contact = {
   linkedin: "https://linkedin.com/in/joanna-joelison",
   github: "https://github.com/Joelijoa",
   phone: "+212 6 94 82 69 89",
-  location: "Casablanca, Maroc",
+  location: "Rabat, Maroc",
 };

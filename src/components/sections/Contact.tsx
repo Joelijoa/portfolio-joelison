@@ -40,7 +40,7 @@ function SignalPanel({ active }: { active: boolean }) {
       {[0, 1, 2].map((i) => (
         <div
           key={i}
-          className="absolute border border-white/10"
+          className="absolute border border-green-400/20"
           style={{
             inset: `${i * 20}%`,
             animation: active ? `pulse-ring ${2.0 + i * 0.7}s ease-in-out ${i * 0.35}s infinite` : "none",
@@ -51,18 +51,18 @@ function SignalPanel({ active }: { active: boolean }) {
         <div
           className="absolute left-0 right-0 h-px"
           style={{
-            background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent)",
+            background: "linear-gradient(90deg, transparent, rgba(74,222,128,0.5), transparent)",
             animation: "signal-scan 2.2s linear infinite",
           }}
         />
       )}
       <div className="relative flex items-center justify-center w-8 h-8">
-        <div className="absolute inset-x-0 top-1/2 h-px bg-white/20" />
-        <div className="absolute inset-y-0 left-1/2 w-px bg-white/20" />
+        <div className="absolute inset-x-0 top-1/2 h-px bg-green-400/20" />
+        <div className="absolute inset-y-0 left-1/2 w-px bg-green-400/20" />
         <motion.div
           animate={active ? { opacity: [0.2, 1, 0.2], scale: [0.9, 1.15, 0.9] } : { opacity: 0.15 }}
           transition={{ duration: 1.8, repeat: Infinity }}
-          className="w-1.5 h-1.5 border border-white/50"
+          className="w-1.5 h-1.5 border border-green-400/60"
         />
       </div>
       <div className="absolute bottom-3 font-mono text-[8px] text-center space-y-0.5">
@@ -70,13 +70,13 @@ function SignalPanel({ active }: { active: boolean }) {
           <motion.span
             animate={active ? { opacity: [1, 0.1, 1] } : { opacity: 0.1 }}
             transition={{ duration: 1.3, repeat: Infinity }}
-            className="w-1 h-1 rounded-full bg-white inline-block"
+            className="w-1 h-1 rounded-full bg-green-400 inline-block"
           />
-          <span className={active ? "text-white/60" : "text-white/20"}>
+          <span className={active ? "text-green-400" : "text-white/40"}>
             {active ? "SIGNAL ACQUIRED" : "SCANNING..."}
           </span>
         </div>
-        <div className="text-white/20">ENC: AES-256-GCM · TLS 1.3</div>
+        <div className="text-white/40">ENC: AES-256-GCM &middot; TLS 1.3</div>
       </div>
     </div>
   );
@@ -95,24 +95,24 @@ function CommRow({ item, active }: { item: typeof COMMS[0]; active: boolean }) {
   const decrypted = useDecrypt(item.value, active, item.delay, 16);
   return (
     <div className="flex items-center gap-0 border-b border-white/8 last:border-0 py-2.5 font-mono group">
-      <span className="text-white/20 text-[8px] w-6 shrink-0">{item.id}</span>
-      <span className="text-white/35 text-[8px] uppercase tracking-widest w-20 shrink-0 pr-2">{item.label}</span>
+      <span className="text-white text-[8px] w-6 shrink-0">{item.id}</span>
+      <span className="text-white text-[8px] uppercase tracking-widest w-20 shrink-0 pr-2">{item.label}</span>
       {item.href ? (
         <a
           href={item.href}
           target={item.href.startsWith("http") ? "_blank" : undefined}
           rel="noopener noreferrer"
-          className="text-white text-[10px] hover:text-white/60 transition-colors flex-1 tracking-wide pointer-events-auto truncate"
+          className="text-white text-[10px] hover:text-white transition-colors flex-1 tracking-wide pointer-events-auto truncate"
         >
           {decrypted}
         </a>
       ) : (
-        <span className="text-white/60 text-[10px] flex-1 tracking-wide truncate">{decrypted}</span>
+        <span className="text-white text-[10px] flex-1 tracking-wide truncate">{decrypted}</span>
       )}
       <motion.span
         animate={{ opacity: [1, 0.1, 1] }}
         transition={{ duration: 2.4, repeat: Infinity, delay: item.delay / 1200 }}
-        className="text-[7px] text-white/20 shrink-0 ml-1"
+        className="text-[7px] text-white shrink-0 ml-1"
       >
         LIVE
       </motion.span>
@@ -181,8 +181,8 @@ export default function Contact({
 
             {/* Terminal command */}
             <motion.p style={{ opacity: termOp, y: termY }} className="font-mono text-[9px]">
-              <span className="text-white/40">root@compromised:~$ </span>
-              <span className="text-white/70">./open_secure_channel.sh --target=joelison --enc=AES256-GCM</span>
+              <span className="text-green-400">root@joelison:~$ </span>
+              <span className="text-white/50">./open_secure_channel.sh --target=joelison --enc=AES256-GCM</span>
             </motion.p>
 
             {/* Grid: heading+signal | comms */}
@@ -192,13 +192,13 @@ export default function Contact({
               <div className="flex flex-col gap-4">
                 <motion.h2
                   style={{ opacity: headOp, scale: headScale, fontSize: "clamp(2rem, 5vw, 4rem)" }}
-                  className="font-display font-black leading-none tracking-tight"
+                  className="font-display font-black leading-none tracking-tight text-white"
                 >
-                  SECURE<br /><span className="text-white/30">CHANNEL</span>
+                  SECURE<br /><span className="text-white/70">CHANNEL</span>
                 </motion.h2>
 
                 <motion.div style={{ opacity: signalOp }} className="border border-white/10 h-44">
-                  <div className="font-mono text-[7px] text-white/20 px-3 pt-2 uppercase tracking-widest">
+                  <div className="font-mono text-[7px] text-white px-3 pt-2 uppercase tracking-widest">
                     ./signal_probe --host=joelison.local
                   </div>
                   <div className="h-36">
@@ -217,11 +217,11 @@ export default function Contact({
 
                 <motion.div
                   style={{ opacity: useTransform(scrollYProgress, [0.44, 0.55], [0, 1]) }}
-                  className="font-mono text-[8px] text-white/30 space-y-0.5 px-1"
+                  className="font-mono text-[8px] text-white space-y-0.5 px-1"
                 >
-                  <div><span className="text-white/15">[SYS]</span> CHANNEL_ESTABLISHED · FORWARD_SECRECY=ON</div>
+                  <div><span className="text-white">[SYS]</span> CHANNEL_ESTABLISHED · FORWARD_SECRECY=ON</div>
                   <div>
-                    <span className="text-white/15">[SYS]</span>{" "}AWAITING_TRANSMISSION
+                    <span className="text-white">[SYS]</span>{" "}AWAITING_TRANSMISSION
                     <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ duration: 0.7, repeat: Infinity }} className="text-white ml-0.5">_</motion.span>
                   </div>
                 </motion.div>
@@ -230,22 +230,23 @@ export default function Contact({
 
             {/* ── CV — classified file access ── */}
             <motion.div style={{ opacity: cvOp }}>
-              <div className="font-mono text-[8px] text-white/40 mb-1">
-                $ ls -la /root/classified/ | grep cv
+              <div className="font-mono text-[8px] mb-1">
+                <span className="text-green-400">$ </span>
+                <span className="text-white/50">ls -la /root/classified/ | grep cv</span>
               </div>
               <button
                 onClick={() => onOpenCV?.()}
                 className="group w-full text-left border border-white/20 hover:border-white/50 transition-all duration-150 pointer-events-auto"
               >
                 <div className="flex items-center gap-3 px-4 py-2 border-b border-white/10 font-mono text-[9px]">
-                  <span className="text-white/50">-rw-r--r--</span>
-                  <span className="text-white/50">root</span>
-                  <span className="text-white/50">284K</span>
-                  <span className="text-white group-hover:text-white/80 transition-colors">cv_joelison_joanna.pdf</span>
-                  <span className="ml-auto text-white/40 text-[8px]">[ENCRYPTED]</span>
+                  <span className="text-white">-rw-r--r--</span>
+                  <span className="text-white">root</span>
+                  <span className="text-white">284K</span>
+                  <span className="text-white group-hover:text-white transition-colors">cv_joelison_joanna.pdf</span>
+                  <span className="ml-auto text-white text-[8px]">[ENCRYPTED]</span>
                 </div>
                 <div className="px-4 py-2.5 flex items-center justify-between font-mono">
-                  <span className="text-white/50 text-[9px] group-hover:text-white/70 transition-colors">
+                  <span className="text-white text-[9px] group-hover:text-white transition-colors">
                     $ decrypt --key=sys &amp;&amp; open cv_joelison_joanna.pdf
                   </span>
                 </div>
@@ -254,13 +255,13 @@ export default function Contact({
 
             {/* ── Exit terminal ── */}
             <motion.div style={{ opacity: exitOp }} className="font-mono text-[10px]">
-              <div className="text-white/35 text-[8px] mb-1 uppercase tracking-widest">
+              <div className="text-white text-[8px] mb-1 uppercase tracking-widest">
                 — session active — type &apos;exit&apos; to disconnect —
               </div>
               <div className="flex items-center gap-2 border border-white/15 px-3 py-2">
-                <span className="text-white/50 shrink-0">root@joelison:~$</span>
+                <span className="text-green-400 shrink-0">root@joelison:~$</span>
                 {exitDone ? (
-                  <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-white/60">
+                  <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-white">
                     exit
                   </motion.span>
                 ) : (
@@ -285,7 +286,7 @@ export default function Contact({
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.15 }}
-                  className="text-white/40 text-[8px] mt-1 space-y-0.5"
+                  className="text-white text-[8px] mt-1 space-y-0.5"
                 >
                   <div>Connection to joelison.local closed.</div>
                   <div>Logout.</div>
@@ -295,11 +296,11 @@ export default function Contact({
 
             {/* ── Footer ── */}
             <motion.div style={{ opacity: footerOp }} className="pt-3 border-t border-white/10 font-mono text-[8px]">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-white/35">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-white">
                 <div>END TRANSMISSION.</div>
                 <div className="text-right">
                   <div>© 2025 JOELISON JOANNA VONINJOHARY</div>
-                  <div className="text-white/20">CASABLANCA · MAROC · 33.57°N</div>
+                  <div className="text-white">CASABLANCA · MAROC · 33.57°N</div>
                 </div>
               </div>
             </motion.div>

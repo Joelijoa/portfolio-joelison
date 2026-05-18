@@ -2,69 +2,76 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import BinaryRain from "@/components/BinaryRain";
 
-interface CompromiseScreenProps {
-  onComplete: () => void;
-}
-
-const TERMINAL_LINES = [
-  { cmd: "$ scanning_directories...", delay: 350 },
-  { cmd: "$ analyzing_projects...", delay: 680 },
-  { cmd: "$ extracting_skills...", delay: 1010 },
-  { cmd: "$ loading_experience...", delay: 1340 },
+/* Small skull for the compromise screen */
+const SKULL = [
+  "  ███████  ",
+  " █████████ ",
+  "███████████",
+  "██  ███  ██",
+  "███  █  ███",
+  "███████████",
+  " █████████ ",
+  " ██  █  ██ ",
+  " █████████ ",
 ];
 
-export default function CompromiseScreen({ onComplete }: CompromiseScreenProps) {
-  const [phase, setPhase] = useState<"appear" | "typing" | "loading" | "done">("appear");
-  const [visibleLines, setVisibleLines] = useState(0);
-  const [showProgress, setShowProgress] = useState(false);
+const SCAN_LINES = [
+  { cmd: "$ nmap -sS -O target.local --open",          delay: 200  },
+  { cmd: "$ exploit/smb/ms17_010_eternalblue RUNNING", delay: 560  },
+  { cmd: "$ meterpreter > getsystem",                  delay: 920  },
+  { cmd: "$ NT AUTHORITY\\SYSTEM — ACCESS GRANTED",    delay: 1260 },
+];
+
+interface Props { onComplete: () => void }
+
+export default function CompromiseScreen({ onComplete }: Props) {
+  const [skullLines,    setSkullLines]    = useState(0);
+  const [visibleLines,  setVisibleLines]  = useState(0);
+  const [showProgress,  setShowProgress]  = useState(false);
   const [progressValue, setProgressValue] = useState(0);
+  const [done,          setDone]          = useState(false);
 
+  /* Reveal skull row by row */
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("typing"), 300);
-    return () => clearTimeout(t1);
-  }, []);
+    if (skullLines >= SKULL.length) return;
+    const t = setTimeout(() => setSkullLines((n) => n + 1), skullLines === 0 ? 80 : 55);
+    return () => clearTimeout(t);
+  }, [skullLines]);
 
+  /* Terminal scan lines */
   useEffect(() => {
-    if (phase !== "typing") return;
+    if (skullLines < SKULL.length) return;
+    if (visibleLines >= SCAN_LINES.length) return;
+    const gap = visibleLines === 0
+      ? SCAN_LINES[0].delay
+      : SCAN_LINES[visibleLines].delay - SCAN_LINES[visibleLines - 1].delay;
+    const t = setTimeout(() => setVisibleLines((n) => n + 1), gap);
+    return () => clearTimeout(t);
+  }, [skullLines, visibleLines]);
 
-    const timers: ReturnType<typeof setTimeout>[] = [];
-
-    TERMINAL_LINES.forEach(({ delay }, i) => {
-      timers.push(setTimeout(() => setVisibleLines(i + 1), delay));
-    });
-
-    timers.push(
-      setTimeout(() => {
-        setShowProgress(true);
-        setPhase("loading");
-      }, 1640)
-    );
-
-    return () => timers.forEach(clearTimeout);
-  }, [phase]);
+  /* Progress bar after scan */
+  useEffect(() => {
+    if (visibleLines < SCAN_LINES.length) return;
+    const t = setTimeout(() => setShowProgress(true), 200);
+    return () => clearTimeout(t);
+  }, [visibleLines]);
 
   useEffect(() => {
     if (!showProgress) return;
-
     let raf: number;
     const start = performance.now();
-    const duration = 1200;
-
+    const duration = 1100;
     const tick = (now: number) => {
-      const elapsed = now - start;
-      const pct = Math.min((elapsed / duration) * 100, 100);
+      const pct = Math.min(((now - start) / duration) * 100, 100);
       setProgressValue(pct);
       if (pct < 100) {
         raf = requestAnimationFrame(tick);
       } else {
-        setTimeout(() => {
-          setPhase("done");
-          setTimeout(onComplete, 400);
-        }, 150);
+        setTimeout(() => { setDone(true); setTimeout(onComplete, 380); }, 120);
       }
     };
-
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [showProgress, onComplete]);
@@ -73,94 +80,121 @@ export default function CompromiseScreen({ onComplete }: CompromiseScreenProps) 
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.4, ease: "easeIn" } }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 bg-black z-30 flex flex-col items-center justify-center overflow-hidden"
+      exit={{ opacity: 0, transition: { duration: 0.35, ease: "easeIn" } }}
+      transition={{ duration: 0.18 }}
+      className="fixed inset-0 bg-black z-30 flex items-center justify-center overflow-hidden"
     >
-      {/* Scanlines overlay */}
-      <div className="scanlines-overlay" />
+      <BinaryRain />
 
-      {/* Noise texture */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }}
-      />
+      {/* Corner info */}
+      <div className="absolute top-5 left-5 font-mono text-[9px] text-white space-y-0.5">
+        <div>SYS :: BREACH_DETECTED</div>
+        <div>VECTOR :: SMB/MS17-010</div>
+        <div>TIME :: {new Date().toISOString().slice(11, 19)} UTC</div>
+      </div>
+      <div className="absolute top-5 right-5 font-mono text-[9px] text-white text-right space-y-0.5">
+        <div>TARGET :: portfolio.local</div>
+        <div>STATUS :: COMPROMISED</div>
+        <div>ACCESS :: ROOT</div>
+      </div>
 
       {/* Main content */}
-      <div className="relative z-10 w-full max-w-2xl px-6 font-mono">
-        {/* WARNING HEADER */}
-        <AnimatePresence>
+      <div className="relative z-10 flex flex-col items-center gap-8 px-6 w-full max-w-xl">
+
+        {/* Skull */}
+        <div className="font-mono leading-tight text-white text-center" style={{ fontSize: "clamp(14px, 2.2vw, 24px)" }}>
+          {SKULL.map((row, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scaleX: 0.6 }}
+              animate={i < skullLines ? { opacity: 1, scaleX: 1 } : {}}
+              transition={{ duration: 0.12 }}
+            >
+              <pre className="whitespace-pre">{row}</pre>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Warning title */}
+        {skullLines >= SKULL.length && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-            className="text-center mb-12"
+            transition={{ duration: 0.25 }}
+            className="text-center"
           >
             <p
-              className="glitch-text text-white font-mono font-bold text-2xl sm:text-3xl md:text-4xl uppercase tracking-widest mb-3"
+              className="glitch-text font-mono font-black text-white uppercase tracking-widest"
               data-text="⚠ SYSTEM COMPROMISED ⚠"
+              style={{ fontSize: "clamp(1rem, 2.8vw, 1.6rem)" }}
             >
               ⚠ SYSTEM COMPROMISED ⚠
             </p>
-            <p className="text-[10px] text-white/40 uppercase tracking-[0.4em]">
-              Unauthorized access detected · Initiating security scan
+            <p className="font-mono text-[9px] text-white uppercase tracking-[0.35em] mt-2">
+              Unauthorized access detected · Initiating scan
             </p>
           </motion.div>
-        </AnimatePresence>
+        )}
 
         {/* Divider */}
-        <div className="w-full h-px bg-white/10 mb-8" />
+        {skullLines >= SKULL.length && (
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.35 }}
+            className="w-full h-px bg-white/15 origin-left"
+          />
+        )}
 
-        {/* Terminal output */}
-        <div className="mb-8 min-h-[100px]">
-          {TERMINAL_LINES.slice(0, visibleLines).map(({ cmd }, i) => (
+        {/* Terminal scan output */}
+        <div className="w-full space-y-2 min-h-[88px]">
+          {SCAN_LINES.slice(0, visibleLines).map(({ cmd }, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: -8 }}
+              initial={{ opacity: 0, x: -6 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3 }}
-              className="flex items-center gap-2 mb-2"
+              transition={{ duration: 0.2 }}
+              className="flex items-center gap-3 font-mono text-[11px]"
             >
-              <span className="text-white/30 text-xs">{String(i + 1).padStart(2, "0")}</span>
-              <span className="text-white text-sm">{cmd}</span>
-              {i === visibleLines - 1 && visibleLines < TERMINAL_LINES.length && (
-                <span className="inline-block w-2 h-4 bg-white blink" />
+              <span className="text-white shrink-0 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+              <span className={i === visibleLines - 1 && visibleLines < SCAN_LINES.length ? "text-white" : "text-white"}>
+                {cmd}
+              </span>
+              {i === visibleLines - 1 && visibleLines < SCAN_LINES.length && (
+                <span className="inline-block w-2 h-3.5 bg-white blink" />
               )}
               {i < visibleLines - 1 && (
-                <span className="text-white/40 text-xs ml-auto">✓ OK</span>
+                <span className="ml-auto text-white text-[9px] shrink-0">✓</span>
               )}
             </motion.div>
           ))}
         </div>
 
-        {/* Progress bar */}
+        {/* Progress */}
         <AnimatePresence>
           {showProgress && (
             <motion.div
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.25 }}
+              className="w-full"
             >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-white/60 text-xs uppercase tracking-widest">Loading profile</span>
-                <span className="text-white text-xs font-mono">
-                  {Math.round(progressValue)}%
-                </span>
+              <div className="flex justify-between font-mono text-[9px] text-white mb-1.5">
+                <span>LOADING OPERATOR PROFILE</span>
+                <span className="text-white">{Math.round(progressValue)}%</span>
               </div>
-              <div className="w-full h-px bg-white/10 relative">
+              <div className="w-full h-px bg-white/10 relative mb-1.5">
                 <div
-                  className="absolute top-0 left-0 h-full bg-white transition-none"
-                  style={{ width: `${progressValue}%` }}
+                  className="absolute top-0 left-0 h-full bg-white"
+                  style={{ width: `${progressValue}%`, transition: "none" }}
                 />
               </div>
-              <div className="flex justify-between mt-1">
-                {Array.from({ length: 20 }).map((_, i) => (
+              <div className="flex gap-px">
+                {Array.from({ length: 24 }).map((_, i) => (
                   <div
                     key={i}
-                    className={`w-px h-1 transition-colors duration-75 ${
-                      (i / 20) * 100 <= progressValue ? "bg-white/60" : "bg-white/10"
+                    className={`h-1 flex-1 transition-colors duration-75 ${
+                      (i / 24) * 100 <= progressValue ? "bg-white/50" : "bg-white/8"
                     }`}
                   />
                 ))}
@@ -169,30 +203,18 @@ export default function CompromiseScreen({ onComplete }: CompromiseScreenProps) 
           )}
         </AnimatePresence>
 
-        {/* Done message */}
+        {/* Done */}
         <AnimatePresence>
-          {phase === "done" && (
+          {done && (
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-white text-xs font-mono mt-4 text-center tracking-widest uppercase"
+              className="font-mono text-[10px] text-white uppercase tracking-widest"
             >
-              Profile loaded — entering portfolio
+              Profile loaded — entering system...
             </motion.p>
           )}
         </AnimatePresence>
-      </div>
-
-      {/* Corner coords */}
-      <div className="absolute top-4 left-4 font-mono text-[9px] text-white/20 leading-relaxed">
-        <div>SYS :: BREACH_DETECTED</div>
-        <div>VECTOR :: SMB_EXPLOIT</div>
-        <div>TIME :: {new Date().toISOString().slice(11, 19)}</div>
-      </div>
-      <div className="absolute bottom-4 right-4 font-mono text-[9px] text-white/20 text-right leading-relaxed">
-        <div>TARGET :: portfolio.local</div>
-        <div>STATUS :: COMPROMISED</div>
-        <div>ACCESS :: ROOT</div>
       </div>
     </motion.div>
   );
