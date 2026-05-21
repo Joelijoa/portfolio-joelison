@@ -343,7 +343,7 @@ export default function Skills() {
                   transition={{ duration: 0.2 }}
                   className="h-px"
                 />
-                <span className={`font-mono text-[8px] uppercase tracking-wider transition-colors duration-300 ${i === activeIdx ? "text-white" : "text-white"}`}>
+                <span className={`font-mono text-[8px] uppercase tracking-wider transition-colors duration-300 ml-1 ${i === activeIdx ? "text-white" : "text-white"}`}>
                   {m.id.replace(/_/g, " ").toLowerCase()}
                 </span>
               </div>
@@ -374,7 +374,7 @@ export default function Skills() {
         {/* Bottom progress */}
         <div className="absolute bottom-8 left-44 md:left-52 right-6 md:right-14 z-20">
           <div className="flex items-center justify-between font-mono text-[9px] text-white mb-2">
-            <span>{META[activeIdx]?.id ?? ""}</span>
+            <span className="ml-3">{META[activeIdx]?.id ?? ""}</span>
             <span>{META[activeIdx]?.level ?? ""}%</span>
           </div>
           <ModuleProgress activeIdx={activeIdx} scrollYProgress={scrollYProgress} />

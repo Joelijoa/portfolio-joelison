@@ -29,24 +29,6 @@ export interface Experience {
 
 export const projects: Project[] = [
   {
-    id: "zerogap-platform",
-    title: "ZeroGap — Plateforme d'Audit GRC",
-    subtitle: "Stage PFE — DataProtect, Rabat",
-    category: "GRC",
-    description:
-      "Conception et développement complet de ZeroGap, une plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI. Système d'évaluation automatique de maturité SMSI, tableaux de bord interactifs multi-profils, workflow de validation des audits et plan d'action correctif avec alertes temps réel.",
-    highlights: [
-      "Système d'évaluation automatique du niveau de conformité et de maturité SMSI",
-      "Tableaux de bord interactifs avec graphiques synthétisant les résultats d'audit par profil",
-      "Workflow de validation des audits et plan d'action correctif avec alertes temps réel",
-      "Rédaction de la documentation technique complète de l'application",
-    ],
-    stack: ["React", "Node.js", "PostgreSQL", "Docker", "ISO 27001", "DNSSI"],
-    featured: true,
-    period: "Nov. 2025 — En cours",
-    company: "DataProtect",
-  },
-  {
     id: "pentest-ms17-010",
     title: "Pentest Windows MS17-010",
     subtitle: "Exploitation EternalBlue — NT AUTHORITY\\SYSTEM",
