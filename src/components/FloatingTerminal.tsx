@@ -60,8 +60,10 @@ export default function FloatingTerminal({
   const [historyIdx, setHistoryIdx] = useState(-1);
   const [cmdHistory, setCmdHistory] = useState<string[]>([]);
 
-  const inputRef  = useRef<HTMLInputElement>(null);
-  const outputRef = useRef<HTMLDivElement>(null);
+  const inputRef   = useRef<HTMLInputElement>(null);
+  const outputRef  = useRef<HTMLDivElement>(null);
+  const panelRef   = useRef<HTMLDivElement>(null);
+  const toggleRef  = useRef<HTMLButtonElement>(null);
 
   /* Scroll to bottom on new output */
   useEffect(() => {
@@ -84,6 +86,19 @@ export default function FloatingTerminal({
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
+  }, [open]);
+
+  /* Close on outside click */
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (panelRef.current?.contains(target)) return;
+      if (toggleRef.current?.contains(target)) return;
+      setOpen(false);
+    };
+    window.addEventListener("mousedown", handler);
+    return () => window.removeEventListener("mousedown", handler);
   }, [open]);
 
   const push = useCallback((incoming: Line | Line[]) => {
@@ -349,6 +364,7 @@ export default function FloatingTerminal({
     <>
       {/* Floating toggle button */}
       <button
+        ref={toggleRef}
         onClick={() => setOpen((v) => !v)}
         title="Press ` (backtick) to toggle terminal"
         className="fixed bottom-6 right-6 z-40 font-mono text-[9px] border border-white/20 hover:border-white/50 text-white hover:text-white px-3 py-1.5 bg-black transition-all duration-150 uppercase tracking-widest"
@@ -360,6 +376,7 @@ export default function FloatingTerminal({
       <AnimatePresence>
         {open && (
           <motion.div
+            ref={panelRef}
             initial={{ opacity: 0, y: 12, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.98 }}

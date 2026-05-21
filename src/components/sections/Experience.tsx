@@ -286,7 +286,11 @@ function MissionDetailModal({
         </div>
 
         {/* Scrollable body */}
-        <div className="flex-1 overflow-y-auto overscroll-contain p-5 space-y-6 relative z-20">
+        <div
+          className="flex-1 overflow-y-auto overscroll-contain p-5 space-y-6 relative z-20"
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+        >
 
           {/* Operation title */}
           <div>
