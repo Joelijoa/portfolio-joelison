@@ -22,13 +22,18 @@ export default function Nav() {
       setScrolled(window.scrollY > 40);
       setJjVisible(window.scrollY > window.innerHeight * 0.33);
 
-      const offsets = SECTIONS.map(({ id }) => {
+      // Section active = celle dont le top a passé le haut du viewport
+      // ET dont le bas est encore visible (bottom > 0).
+      // On itère dans l'ordre et on garde la dernière correspondance
+      // → la section la plus avancée que l'utilisateur est en train de parcourir.
+      let newActive = SECTIONS[0].id;
+      for (const { id } of SECTIONS) {
         const el = document.getElementById(id);
-        if (!el) return { id, top: Infinity };
-        return { id, top: Math.abs(el.getBoundingClientRect().top - 100) };
-      });
-      const closest = offsets.reduce((a, b) => (a.top < b.top ? a : b));
-      setActive(closest.id);
+        if (!el) continue;
+        const { top, bottom } = el.getBoundingClientRect();
+        if (top <= 0 && bottom > 0) newActive = id;
+      }
+      setActive(newActive);
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
