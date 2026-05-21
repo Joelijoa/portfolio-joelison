@@ -20,7 +20,7 @@ export default function Nav() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
-      setJjVisible(window.scrollY > 400);
+      setJjVisible(window.scrollY > window.innerHeight * 0.33);
 
       const offsets = SECTIONS.map(({ id }) => {
         const el = document.getElementById(id);

@@ -63,7 +63,7 @@ export default function Hero() {
   const j2Y     = useTransform(spring, [0, 0.13], [fly2.y, navPos.y]);
   const j2Scale = useTransform(spring, [0, 0.13], [fly2.scale, 1]);
 
-  const flyOpacity = useTransform(spring, [0, 0.02, 0.10, 0.13], [0, 1, 1, 0]);
+  const flyOpacity = useTransform(spring, [0, 0.02, 0.11, 0.16], [0, 1, 1, 0]);
 
   const flyBase: React.CSSProperties = {
     position: "fixed",
