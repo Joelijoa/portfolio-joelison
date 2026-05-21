@@ -216,17 +216,17 @@ function OperationCard({ project, index, onOpen }: {
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative flex-shrink-0 w-[85vw] sm:w-[60vw] lg:w-[44vw] xl:w-[38vw] border border-dim flex flex-col font-mono transition-colors duration-300 hover:border-white/50 bg-black overflow-hidden"
-      style={{ height: "min(78vh, 640px)" }}
+      className="relative flex-shrink-0 w-[88vw] sm:w-[70vw] md:w-[55vw] lg:w-[44vw] xl:w-[38vw] border border-dim flex flex-col font-mono transition-colors duration-300 hover:border-white/50 bg-black overflow-hidden"
+      style={{ height: "clamp(360px, 62vh, 580px)" }}
     >
       {/* File header */}
-      <div className="border-b border-dim px-7 py-4 flex items-center justify-between shrink-0">
-        <div className="flex items-center gap-3">
+      <div className="border-b border-dim px-4 sm:px-7 py-3 sm:py-4 flex items-center justify-between shrink-0">
+        <div className="flex items-center gap-2 sm:gap-3">
           <span className="text-[9px] border border-white/60 text-white px-1.5 py-0.5 uppercase tracking-widest">
             [{classification}]
           </span>
           {project.featured && (
-            <span className="text-[9px] border border-white/60 text-white px-1.5 py-0.5 uppercase tracking-widest">
+            <span className="text-[9px] border border-white/60 text-white px-1.5 py-0.5 uppercase tracking-widest hidden sm:inline">
               &#9733; PRIORITY
             </span>
           )}
@@ -235,19 +235,23 @@ function OperationCard({ project, index, onOpen }: {
       </div>
 
       {/* File path */}
-      <div className="px-7 py-2 border-b border-dim/40 shrink-0">
-        <span className="text-[9px] text-white">
+      <div className="px-4 sm:px-7 py-1.5 sm:py-2 border-b border-dim/40 shrink-0">
+        <span className="text-[9px] text-white truncate block">
           /root/ops/{project.id}/{project.id.replace(/-/g, "_")}.enc
         </span>
       </div>
 
       {/* Body */}
-      <div className="flex-1 px-7 py-6 flex flex-col gap-5 overflow-hidden">
+      <div
+        className="flex-1 px-4 sm:px-7 py-4 sm:py-6 flex flex-col gap-3 sm:gap-5 overflow-y-auto overscroll-contain"
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
+      >
         <div>
           <div className="text-[9px] text-white uppercase tracking-widest mb-1">Operation:</div>
           <h3
             className="font-display font-black text-white leading-tight transition-all duration-500"
-            style={{ fontSize: hovered ? "clamp(1.5rem, 3.2vw, 2.2rem)" : "clamp(1.25rem, 2.8vw, 1.9rem)" }}
+            style={{ fontSize: hovered ? "clamp(1.1rem, 3.2vw, 2.2rem)" : "clamp(1rem, 2.8vw, 1.9rem)" }}
           >
             {project.title.toUpperCase()}
           </h3>
@@ -286,7 +290,7 @@ function OperationCard({ project, index, onOpen }: {
       </div>
 
       {/* Priority bar */}
-      <div className="px-7 py-3 border-t border-dim/40 shrink-0">
+      <div className="px-4 sm:px-7 py-2 sm:py-3 border-t border-dim/40 shrink-0">
         <div className="flex items-center justify-between text-[9px] text-white mb-1.5">
           <span>PRIORITY LEVEL</span>
           <span>{priority}%</span>
@@ -302,7 +306,7 @@ function OperationCard({ project, index, onOpen }: {
       </div>
 
       {/* Footer */}
-      <div className="border-t border-dim px-7 py-3 flex items-center gap-3 shrink-0">
+      <div className="border-t border-dim px-4 sm:px-7 py-2 sm:py-3 flex items-center gap-3 shrink-0">
         <div className="flex-1 flex items-center gap-3">
           {project.company ? (
             <>
@@ -384,12 +388,12 @@ export default function Projects() {
         style={{ height: `${projects.length * 90 + 200}vh` }}
         className="relative"
       >
-        <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
+        <div className="sticky top-0 h-screen overflow-hidden flex flex-col">
 
           {/* Header */}
           <motion.div
             style={{ opacity: headerOpacity, y: headerY }}
-            className="px-6 md:px-12 pt-6 mb-8 shrink-0"
+            className="px-4 sm:px-6 md:px-12 pt-16 sm:pt-20 md:pt-16 mb-4 sm:mb-5 shrink-0"
           >
             <div className="flex items-end justify-between">
               <div>
@@ -416,7 +420,7 @@ export default function Projects() {
           <motion.div
             ref={trackRef}
             style={{ x }}
-            className="flex gap-4 md:gap-5 pl-6 md:pl-12 pr-6 flex-shrink-0"
+            className="flex gap-4 md:gap-5 pl-4 sm:pl-6 md:pl-12 pr-4 sm:pr-6 flex-shrink-0"
           >
             {projects.map((p, i) => (
               <OperationCard key={p.id} project={p} index={i} onOpen={setSelectedProject} />
@@ -425,7 +429,7 @@ export default function Projects() {
           </motion.div>
 
           {/* Progress */}
-          <div className="absolute bottom-8 left-6 md:left-12 right-6 md:right-12 flex items-center gap-4 shrink-0">
+          <div className="absolute bottom-8 left-4 sm:left-6 md:left-12 right-4 sm:right-6 md:right-12 flex items-center gap-4 shrink-0">
             <div className="flex-1 h-px bg-dim relative overflow-hidden">
               <motion.div style={{ width: progressWidth }} className="absolute left-0 top-0 h-full bg-white" />
             </div>

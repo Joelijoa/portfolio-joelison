@@ -135,9 +135,9 @@ function ModuleSlide({
   return (
     <motion.div
       style={{ opacity: slideOpacity, y: slideY }}
-      className="absolute inset-0 flex items-center pointer-events-none"
+      className="absolute inset-0 flex items-center pt-14 sm:pt-10 md:pt-6 pointer-events-none"
     >
-      <div className="w-full h-full flex items-center px-6 md:px-10 lg:px-14">
+      <div className="w-full h-full flex items-center px-4 sm:px-6 md:px-10 lg:px-14">
         <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_400px] gap-10 lg:gap-16 items-start">
 
           {/* ── LEFT: main content ── */}
@@ -321,8 +321,8 @@ export default function Skills() {
       <div className="sticky top-0 h-screen overflow-hidden">
 
         {/* ── LEFT SIDEBAR ── */}
-        <div className="absolute top-0 left-0 bottom-0 z-10 flex flex-col justify-between pt-24 pb-14 px-5 md:px-8 border-r border-white/8 w-44 md:w-52">
-          <div>
+        <div className="absolute top-0 left-0 bottom-0 z-10 flex flex-col justify-between pt-16 pb-14 px-2 sm:px-4 md:px-5 lg:px-8 border-r border-white/8 w-10 sm:w-36 md:w-44 lg:w-52">
+          <div className="hidden sm:block">
             <div className="font-mono text-[7px] text-white uppercase tracking-widest mb-4">
               ./load_modules.sh
             </div>
@@ -341,9 +341,9 @@ export default function Skills() {
                 <motion.div
                   animate={{ width: i === activeIdx ? 12 : 4, background: i === activeIdx ? "#fff" : "#333" }}
                   transition={{ duration: 0.2 }}
-                  className="h-px"
+                  className="h-px shrink-0"
                 />
-                <span className={`font-mono text-[8px] uppercase tracking-wider transition-colors duration-300 ml-1 ${i === activeIdx ? "text-white" : "text-white"}`}>
+                <span className={`hidden sm:inline font-mono text-[8px] uppercase tracking-wider transition-colors duration-300 ml-1 ${i === activeIdx ? "text-white" : "text-white"}`}>
                   {m.id.replace(/_/g, " ").toLowerCase()}
                 </span>
               </div>
@@ -351,14 +351,14 @@ export default function Skills() {
           </div>
 
           {/* Counter */}
-          <div className="font-mono text-[9px] text-white">
+          <div className="hidden sm:block font-mono text-[9px] text-white">
             <span className="text-white">{String(activeIdx + 1).padStart(2, "0")}</span>
             <span> / {N}</span>
           </div>
         </div>
 
         {/* ── MAIN AREA ── */}
-        <div className="absolute top-0 left-44 md:left-52 right-0 bottom-0">
+        <div className="absolute top-0 left-10 sm:left-36 md:left-44 lg:left-52 right-0 bottom-0">
           {skillGroups.map((group, i) => (
             <ModuleSlide
               key={group.category}
@@ -372,10 +372,10 @@ export default function Skills() {
         </div>
 
         {/* Bottom progress */}
-        <div className="absolute bottom-8 left-44 md:left-52 right-6 md:right-14 z-20">
+        <div className="absolute bottom-8 left-10 sm:left-36 md:left-44 lg:left-52 right-4 md:right-14 z-20">
           <div className="flex items-center justify-between font-mono text-[9px] text-white mb-2">
-            <span className="ml-3">{META[activeIdx]?.id ?? ""}</span>
-            <span>{META[activeIdx]?.level ?? ""}%</span>
+            <span className="ml-2 sm:ml-3 truncate mr-2">{META[activeIdx]?.id ?? ""}</span>
+            <span className="shrink-0">{META[activeIdx]?.level ?? ""}%</span>
           </div>
           <ModuleProgress activeIdx={activeIdx} scrollYProgress={scrollYProgress} />
           <div className="flex gap-1 mt-2">

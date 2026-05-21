@@ -76,7 +76,7 @@ export default function Hero() {
 
   return (
     <div ref={containerRef} id="hero" style={{ height: "240vh" }}>
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center px-6 md:px-12 pt-24">
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center px-4 sm:px-6 md:px-12 pt-24">
         <div className="max-w-[1400px] mx-auto w-full relative">
 
           {/* Terminal prompt */}
@@ -136,7 +136,7 @@ export default function Hero() {
               </div>
 
               {/* Fields */}
-              <div className="px-5 py-4 space-y-3">
+              <div className="px-4 sm:px-5 py-4 space-y-3">
                 {([
                   ["NAME",        "JOELISON JOANNA VONINJOHARY",             "text-white"],
                   ["STATUS",      "&#9679; ACTIVE",                          "text-white"],
@@ -145,14 +145,14 @@ export default function Hero() {
                   ["LOCATION",    "Rabat, Maroc  [34.0209°N, 6.8417°W]",    "text-white"],
                   ["AFFILIATION", "DataProtect · Neerelab Technology",        "text-white"],
                 ] as const).map(([key, val, cls]) => (
-                  <div key={key} className="grid grid-cols-[130px_1fr] gap-4">
+                  <div key={key} className="grid grid-cols-[90px_1fr] sm:grid-cols-[130px_1fr] gap-2 sm:gap-4">
                     <span className="text-white">{key}:</span>
                     <span className={cls}>{val}</span>
                   </div>
                 ))}
 
                 {/* Threat level blocks */}
-                <div className="grid grid-cols-[130px_1fr] gap-4 pt-1">
+                <div className="grid grid-cols-[90px_1fr] sm:grid-cols-[130px_1fr] gap-2 sm:gap-4 pt-1">
                   <span className="text-white">THREAT LVL:</span>
                   <div className="flex items-center gap-2">
                     <div className="flex gap-0.5">

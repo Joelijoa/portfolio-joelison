@@ -446,7 +446,7 @@ function MissionSlide({
   return (
     <motion.div
       style={{ opacity: slideOpacity, x: slideX }}
-      className="absolute inset-0 flex items-center px-6 md:px-16 pointer-events-none"
+      className="absolute inset-0 flex items-center pt-14 sm:pt-10 md:pt-6 px-4 sm:px-8 md:px-12 lg:px-16 pointer-events-none"
     >
       <div className="max-w-[1400px] mx-auto w-full">
 
@@ -620,13 +620,13 @@ export default function Experience() {
         <div className="sticky top-0 h-screen overflow-hidden">
 
           {/* Top-left */}
-          <div className="absolute top-20 left-6 md:left-16 z-20 font-mono text-[10px]">
+          <div className="absolute top-20 left-4 sm:left-8 md:left-12 lg:left-16 z-20 font-mono text-[10px]">
             <span className="text-green-400">root@joelison:~$ </span>
             <span className="text-white/50">cat /ops/field_log.enc | decrypt</span>
           </div>
 
           {/* Top-right */}
-          <div className="absolute top-20 right-6 md:right-16 z-20 font-mono text-[10px] text-white/40 uppercase tracking-widest">
+          <div className="hidden sm:block absolute top-20 right-4 sm:right-8 md:right-12 lg:right-16 z-20 font-mono text-[10px] text-white/40 uppercase tracking-widest">
             FIELD_OPERATIONS
           </div>
 
@@ -645,7 +645,7 @@ export default function Experience() {
           </div>
 
           {/* Bottom progress */}
-          <div className="absolute bottom-8 left-6 md:left-16 right-6 md:right-16 z-20">
+          <div className="absolute bottom-8 left-4 sm:left-8 md:left-12 lg:left-16 right-4 sm:right-8 md:right-12 lg:right-16 z-20">
             <div className="flex items-center justify-between font-mono text-[10px] text-white mb-2">
               <span>
                 OPERATION{" "}

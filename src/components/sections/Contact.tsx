@@ -175,7 +175,7 @@ export default function Contact({
         style={{ height: "280vh" }}
         className="relative"
       >
-        <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center px-6 md:px-12 py-10">
+        <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center px-4 sm:px-6 md:px-12 pt-16 sm:pt-14 md:pt-10 pb-8">
           <div className="max-w-[1400px] mx-auto w-full space-y-5">
 
             {/* Terminal command */}
