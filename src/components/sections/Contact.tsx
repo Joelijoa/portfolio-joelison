@@ -168,14 +168,14 @@ export default function Contact({
   };
 
   return (
-    <>
+    <div id="contact">
+      {/* Desktop — pin & reveal au scroll */}
       <div
         ref={containerRef}
-        id="contact"
         style={{ height: "280vh" }}
-        className="relative"
+        className="relative hidden md:block"
       >
-        <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-start sm:justify-center px-4 sm:px-6 md:px-12 pt-24 sm:pt-14 md:pt-10 pb-8">
+        <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center px-6 md:px-12 pt-14 md:pt-10 pb-8">
           <div className="max-w-[1400px] mx-auto w-full space-y-5">
 
             {/* Terminal command */}
@@ -306,6 +306,110 @@ export default function Contact({
           </div>
         </div>
       </div>
-    </>
+
+      {/* Mobile — flux normal, tout visible via scroll natif */}
+      <div className="md:hidden px-4 py-16 space-y-6">
+
+        <p className="font-mono text-[9px]">
+          <span className="text-green-400">root@joelison:~$ </span>
+          <span className="text-white/50">./open_secure_channel.sh --target=joelison --enc=AES256-GCM</span>
+        </p>
+
+        <h2
+          className="font-display font-black leading-none tracking-tight text-white"
+          style={{ fontSize: "clamp(2rem, 10vw, 2.6rem)" }}
+        >
+          SECURE<br /><span className="text-white/70">CHANNEL</span>
+        </h2>
+
+        <div className="border border-white/10 h-44">
+          <div className="font-mono text-[7px] text-white px-3 pt-2 uppercase tracking-widest">
+            ./signal_probe --host=joelison.local
+          </div>
+          <div className="h-36">
+            <SignalPanel active />
+          </div>
+        </div>
+
+        <div className="border border-white/10 px-4 py-1">
+          {COMMS.map((item) => (
+            <CommRow key={item.id} item={item} active />
+          ))}
+        </div>
+
+        <div className="font-mono text-[8px] text-white space-y-0.5 px-1">
+          <div><span className="text-white">[SYS]</span> CHANNEL_ESTABLISHED &middot; FORWARD_SECRECY=ON</div>
+          <div>
+            <span className="text-white">[SYS]</span>{" "}AWAITING_TRANSMISSION
+            <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ duration: 0.7, repeat: Infinity }} className="text-white ml-0.5">_</motion.span>
+          </div>
+        </div>
+
+        {/* CV — classified file access */}
+        <div>
+          <div className="font-mono text-[8px] mb-1">
+            <span className="text-green-400">$ </span>
+            <span className="text-white/50">ls -la /root/classified/ | grep cv</span>
+          </div>
+          <button
+            onClick={() => onOpenCV?.()}
+            className="group w-full text-left border border-white/20 active:border-white/50 transition-all duration-150"
+          >
+            <div className="flex items-center gap-3 px-4 py-2 border-b border-white/10 font-mono text-[9px] flex-wrap">
+              <span className="text-white">-rw-r--r--</span>
+              <span className="text-white">root</span>
+              <span className="text-white">284K</span>
+              <span className="text-white">cv_joelison_joanna.pdf</span>
+              <span className="ml-auto text-white text-[8px]">[ENCRYPTED]</span>
+            </div>
+            <div className="px-4 py-2.5 flex items-center justify-between font-mono">
+              <span className="text-white text-[9px]">
+                $ decrypt --key=sys &amp;&amp; open cv_joelison_joanna.pdf
+              </span>
+            </div>
+          </button>
+        </div>
+
+        {/* Exit terminal */}
+        <div className="font-mono text-[10px]">
+          <div className="text-white text-[8px] mb-1 uppercase tracking-widest">
+            — session active — type &apos;exit&apos; to disconnect —
+          </div>
+          <div className="flex items-center gap-2 border border-white/15 px-3 py-2">
+            <span className="text-green-400 shrink-0">root@joelison:~$</span>
+            {exitDone ? (
+              <span className="text-white">exit</span>
+            ) : (
+              <input
+                type="text"
+                value={exitValue}
+                onChange={(e) => setExitValue(e.target.value)}
+                onKeyDown={handleExitKey}
+                spellCheck={false}
+                autoComplete="off"
+                placeholder="type 'exit'..."
+                className="flex-1 bg-transparent outline-none text-white placeholder-white/20 caret-white"
+                style={{ fontFamily: "inherit" }}
+              />
+            )}
+          </div>
+          {exitDone && (
+            <div className="text-white text-[8px] mt-1 space-y-0.5">
+              <div>Connection to joelison.local closed.</div>
+              <div>Logout.</div>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="pt-3 border-t border-white/10 font-mono text-[8px]">
+          <div className="flex flex-col gap-2 text-white">
+            <div>END TRANSMISSION.</div>
+            <div>&copy; 2025 JOELISON JOANNA VONINJOHARY</div>
+            <div className="text-white">RABAT &middot; MAROC &middot; 34.02&deg;N</div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
