@@ -5,6 +5,8 @@ import Lenis from "lenis";
 
 export default function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const lenis = new Lenis({
       lerp: 0.08,
       wheelMultiplier: 0.9,

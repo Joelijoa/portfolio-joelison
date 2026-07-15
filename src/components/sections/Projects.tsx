@@ -353,6 +353,69 @@ function OperationCard({ project, index, onOpen }: {
   );
 }
 
+/* ── Mobile card (stacked, no scroll-jacking) ───────────────── */
+function MobileProjectCard({ project, index, onOpen }: {
+  project: Project;
+  index: number;
+  onOpen: (p: Project) => void;
+}) {
+  const year           = project.period?.match(/\d{4}/)?.[0] ?? "2025";
+  const opId           = `OP-${year}-${String(index + 1).padStart(3, "0")}`;
+  const classification = CLASSIFICATION[project.category];
+
+  return (
+    <div className="border border-dim bg-black font-mono">
+      <div className="border-b border-dim px-4 py-3 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="text-[9px] border border-white/60 text-white px-1.5 py-0.5 uppercase tracking-widest">
+            [{classification}]
+          </span>
+          {project.featured && (
+            <span className="text-[9px] border border-white/60 text-white px-1.5 py-0.5 uppercase tracking-widest">
+              &#9733;
+            </span>
+          )}
+        </div>
+        <span className="text-[10px] text-white">{opId}</span>
+      </div>
+
+      <div className="px-4 py-4 flex flex-col gap-3">
+        <div>
+          <h3
+            className="font-display font-black text-white leading-tight"
+            style={{ fontSize: "clamp(1.15rem, 5.5vw, 1.6rem)" }}
+          >
+            {project.title.toUpperCase()}
+          </h3>
+          <p className="text-[11px] text-white/60 mt-1">{project.subtitle}</p>
+        </div>
+
+        <p className="text-[12px] text-white/80 leading-relaxed">{project.description}</p>
+
+        <div className="flex flex-wrap gap-1.5">
+          {project.stack.slice(0, 6).map((s) => (
+            <span key={s} className="text-[9px] text-white border border-dim/60 px-2 py-0.5">
+              {s}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-between text-[10px] text-white/70 pt-1">
+          <span>{project.company ? `ACTIVE — ${project.company}` : "✓ COMPLETE"}</span>
+          {project.period && <span>{project.period}</span>}
+        </div>
+      </div>
+
+      <button
+        onClick={() => onOpen(project)}
+        className="w-full border-t border-dim px-4 py-3 flex items-center justify-center gap-2 text-[10px] uppercase tracking-widest text-green-400 active:bg-green-400 active:text-black transition-colors"
+      >
+        OPEN DOSSIER &#8594;
+      </button>
+    </div>
+  );
+}
+
 /* ── Main ────────────────────────────────────────────────── */
 export default function Projects() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -381,12 +444,12 @@ export default function Projects() {
   const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <>
+    <div id="projects">
+      {/* Desktop — horizontal scrollytelling épinglé */}
       <div
         ref={containerRef}
-        id="projects"
         style={{ height: `${projects.length * 90 + 200}vh` }}
-        className="relative"
+        className="relative hidden md:block"
       >
         <div className="sticky top-0 h-screen overflow-hidden flex flex-col">
 
@@ -440,6 +503,32 @@ export default function Projects() {
         </div>
       </div>
 
+      {/* Mobile — liste empilée, scroll natif */}
+      <div className="md:hidden px-4 sm:px-6 py-16">
+        <div className="mb-6">
+          <p className="font-mono text-[10px] mb-1">
+            <span className="text-green-400">root@joelison:~$ </span>
+            <span className="text-white/50">ls -la /root/ops/exfiltrated/</span>
+          </p>
+          <h2
+            className="font-display font-black leading-none tracking-tight"
+            style={{ fontSize: "clamp(2rem, 9vw, 2.6rem)" }}
+          >
+            EXFILTRATED
+            <span className="text-white">_DATA/</span>
+          </h2>
+          <div className="font-mono text-[10px] text-white/50 mt-2">
+            {projects.length} files found &middot; sorted by priority
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          {projects.map((p, i) => (
+            <MobileProjectCard key={p.id} project={p} index={i} onOpen={setSelectedProject} />
+          ))}
+        </div>
+      </div>
+
       {/* Modal */}
       <AnimatePresence>
         {selectedProject && (
@@ -449,6 +538,6 @@ export default function Projects() {
           />
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }

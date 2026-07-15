@@ -595,6 +595,73 @@ function MissionSlide({
   );
 }
 
+/* ── Mobile card (stacked, no scroll-jacking) ───────────────── */
+function MobileMissionCard({ mission, index, onOpen }: {
+  mission: Mission;
+  index: number;
+  onOpen: (m: Mission) => void;
+}) {
+  const isActive = mission.status === "ACTIVE";
+  return (
+    <div className="border border-dim bg-black font-mono">
+      <div className="border-b border-dim px-4 py-3 flex items-center justify-between">
+        <span className="text-[9px] text-white/50">
+          {String(index + 1).padStart(2, "0")}/{MISSIONS.length}
+        </span>
+        {isActive ? (
+          <span className="text-[9px] text-white flex items-center gap-1.5">
+            <motion.span
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ duration: 1.4, repeat: Infinity }}
+              className="w-1.5 h-1.5 rounded-full bg-white inline-block"
+            />
+            ACTIVE
+          </span>
+        ) : (
+          <span className="text-[9px] text-white/50">&#10003; COMPLETE</span>
+        )}
+      </div>
+
+      <div className="px-4 py-4 flex flex-col gap-3">
+        <div className="flex items-center gap-2 flex-wrap">
+          <h3
+            className="font-display font-black text-white leading-tight"
+            style={{ fontSize: "clamp(1.15rem, 5.5vw, 1.5rem)" }}
+          >
+            {mission.codename}
+          </h3>
+          {mission.featured && (
+            <span className="text-[8px] uppercase tracking-widest border border-green-400/70 text-green-400 px-1.5 py-0.5">
+              &#9733; Featured
+            </span>
+          )}
+        </div>
+
+        <div className="text-[10px] text-white/50">
+          {mission.company} &middot; {mission.period}
+        </div>
+
+        <p className="text-[12px] text-white/80 leading-relaxed">{mission.brief}</p>
+
+        <div className="flex flex-wrap gap-1.5">
+          {mission.tags.slice(0, 6).map((t) => (
+            <span key={t} className="text-[9px] text-white border border-dim/60 px-2 py-0.5">
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <button
+        onClick={() => onOpen(mission)}
+        className="w-full border-t border-dim px-4 py-3 flex items-center justify-center gap-2 text-[10px] uppercase tracking-widest text-green-400 active:bg-green-400 active:text-black transition-colors"
+      >
+        VIEW FULL REPORT &#8594;
+      </button>
+    </div>
+  );
+}
+
 /* ── Progress bar ─────────────────────────────────────────── */
 function ProgressBar({
   activeIdx,
@@ -632,12 +699,12 @@ export default function Experience() {
   });
 
   return (
-    <>
+    <div id="experience">
+      {/* Desktop — scrollytelling épinglé */}
       <div
         ref={containerRef}
-        id="experience"
         style={{ height: `${N * 100 + 120}vh` }}
-        className="relative"
+        className="relative hidden md:block"
       >
         <div className="sticky top-0 h-screen overflow-hidden">
 
@@ -689,6 +756,25 @@ export default function Experience() {
         </div>
       </div>
 
+      {/* Mobile — liste empilée, scroll natif */}
+      <div className="md:hidden px-4 py-16">
+        <div className="mb-6 font-mono text-[10px]">
+          <span className="text-green-400">root@joelison:~$ </span>
+          <span className="text-white/50">cat /ops/field_log.enc | decrypt</span>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          {MISSIONS.map((mission, i) => (
+            <MobileMissionCard
+              key={mission.id}
+              mission={mission}
+              index={i}
+              onOpen={setSelectedMission}
+            />
+          ))}
+        </div>
+      </div>
+
       {/* Detail modal */}
       <AnimatePresence>
         {selectedMission && (
@@ -698,6 +784,6 @@ export default function Experience() {
           />
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }
