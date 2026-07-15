@@ -320,6 +320,20 @@ export default function Skills() {
     >
       <div className="sticky top-0 h-screen overflow-hidden">
 
+        {/* Section title — visible mobile + desktop */}
+        <div className="absolute top-16 sm:top-20 left-14 sm:left-40 md:left-48 lg:left-56 right-4 z-20 font-mono">
+          <p className="text-[9px] sm:text-[10px] mb-1">
+            <span className="text-green-400">root@joelison:~$ </span>
+            <span className="text-white/50">./load_modules.sh --list</span>
+          </p>
+          <h2
+            className="font-display font-black text-white leading-none tracking-tight"
+            style={{ fontSize: "clamp(1.2rem, 4.5vw, 2rem)" }}
+          >
+            SKILLS<span className="text-white/40">_MATRIX/</span>
+          </h2>
+        </div>
+
         {/* ── LEFT SIDEBAR ── */}
         <div className="absolute top-0 left-0 bottom-0 z-10 flex flex-col justify-between pt-16 pb-14 px-2 sm:px-4 md:px-5 lg:px-8 border-r border-white/8 w-10 sm:w-36 md:w-44 lg:w-52">
           <div className="hidden sm:block">

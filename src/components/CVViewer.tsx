@@ -95,7 +95,7 @@ export default function CVViewer({ open, onClose }: { open: boolean; onClose: ()
           {/* ── Header ── */}
           <div className="shrink-0 border-b border-white/10 px-6 md:px-12 py-3 flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <span className="text-[9px] border border-white/50 text-white px-2 py-0.5 uppercase tracking-widest">
+              <span className="text-[9px] border border-white/50 text-white px-2 py-0.5 uppercase tracking-widest whitespace-nowrap">
                 ★ CLASSIFIED
               </span>
               <span className="font-mono text-[9px] text-white">

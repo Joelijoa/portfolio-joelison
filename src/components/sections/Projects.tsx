@@ -371,7 +371,7 @@ function MobileProjectCard({ project, index, onOpen }: {
             [{classification}]
           </span>
           {project.featured && (
-            <span className="text-[9px] border border-white/60 text-white px-1.5 py-0.5 uppercase tracking-widest">
+            <span className="text-[9px] border border-white/60 text-white px-1.5 py-0.5 uppercase tracking-widest whitespace-nowrap">
               &#9733;
             </span>
           )}

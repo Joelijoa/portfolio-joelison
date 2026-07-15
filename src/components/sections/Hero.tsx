@@ -97,7 +97,7 @@ export default function Hero() {
             style={{ opacity: terminalOpacity }}
             className="flex items-center gap-3 mb-8"
           >
-            <span className="font-mono text-[10px] border border-white text-white px-2 py-0.5 uppercase tracking-widest">
+            <span className="font-mono text-[10px] border border-white text-white px-2 py-0.5 uppercase tracking-widest whitespace-nowrap">
               &#9733; CLASSIFIED
             </span>
             <span className="font-mono text-[10px] text-white">

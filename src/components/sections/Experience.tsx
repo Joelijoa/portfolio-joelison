@@ -307,7 +307,7 @@ function MissionDetailModal({
                 {mission.codename}
               </h2>
               {mission.featured && (
-                <span className="font-mono text-[7px] uppercase tracking-widest border border-green-400/70 text-green-400 px-1.5 py-0.5">
+                <span className="font-mono text-[7px] uppercase tracking-widest border border-green-400/70 text-green-400 px-1.5 py-0.5 whitespace-nowrap">
                   &#9733; Featured
                 </span>
               )}
@@ -499,7 +499,7 @@ function MissionSlide({
                 {mission.codename}
               </h3>
               {mission.featured && (
-                <span className="font-mono text-[9px] uppercase tracking-widest border border-green-400/70 text-green-400 px-2 py-1">
+                <span className="font-mono text-[9px] uppercase tracking-widest border border-green-400/70 text-green-400 px-2 py-1 whitespace-nowrap">
                   &#9733; Featured
                 </span>
               )}
@@ -631,7 +631,7 @@ function MobileMissionCard({ mission, index, onOpen }: {
             {mission.codename}
           </h3>
           {mission.featured && (
-            <span className="text-[8px] uppercase tracking-widest border border-green-400/70 text-green-400 px-1.5 py-0.5">
+            <span className="text-[8px] uppercase tracking-widest border border-green-400/70 text-green-400 px-1.5 py-0.5 whitespace-nowrap">
               &#9733; Featured
             </span>
           )}
