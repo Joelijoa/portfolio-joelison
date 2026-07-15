@@ -41,8 +41,10 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Portfolio is always mounted but visually hidden until phase === portfolio */}
-      {phase === "portfolio" && <Portfolio onExit={handleExit} />}
+      {/* Le Portfolio est toujours monté (contenu indexable par les moteurs de recherche) —
+          il reste visuellement recouvert par l'écran d'accueil/compromission (z-30, opaque)
+          tant que la séquence d'intro n'est pas terminée. */}
+      <Portfolio onExit={handleExit} visible={phase === "portfolio"} />
     </>
   );
 }

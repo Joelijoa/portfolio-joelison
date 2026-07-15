@@ -13,14 +13,20 @@ import Skills from "@/components/sections/Skills";
 import Experience from "@/components/sections/Experience";
 import Contact from "@/components/sections/Contact";
 
-export default function Portfolio({ onExit }: { onExit?: () => void }) {
+export default function Portfolio({
+  onExit,
+  visible = true,
+}: {
+  onExit?: () => void;
+  visible?: boolean;
+}) {
   const [cvOpen, setCvOpen] = useState(false);
 
   return (
     <SmoothScrollProvider>
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={false}
+        animate={{ opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="min-h-screen bg-black"
       >
