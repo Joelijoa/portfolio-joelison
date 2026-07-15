@@ -156,7 +156,7 @@ export const experiences: Experience[] = [
     period: "Nov. 2025 — Mai. 2026",
     current: false,
     description:
-      "Conception et développement complet de ZeroGap au sein du département GRC de DataProtect (Rabat). Plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI avec évaluation automatique de maturité SMSI, tableaux de bord interactifs et workflow de validation des plans d'action. Intégration d'une reformulation automatique des contacts assistée par IA via l'API Groq.",
+      "Conception et développement complet de ZeroGap au sein du département GRC de DataProtect (Casablanca). Plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI avec évaluation automatique de maturité SMSI, tableaux de bord interactifs et workflow de validation des plans d'action. Intégration d'une reformulation automatique des contacts assistée par IA via l'API Groq.",
     tags: ["React", "Node.js", "PostgreSQL", "Docker", "ISO 27001", "DNSSI", "GRC", "Groq API", "IA Générative"],
   },
   {
