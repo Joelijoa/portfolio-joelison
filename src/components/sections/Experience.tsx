@@ -708,10 +708,18 @@ export default function Experience() {
       >
         <div className="sticky top-0 h-screen overflow-hidden">
 
-          {/* Top-left */}
-          <div className="absolute top-20 left-4 sm:left-8 md:left-12 lg:left-16 z-20 font-mono text-[10px]">
-            <span className="text-green-400">root@joelison:~$ </span>
-            <span className="text-white/50">cat /ops/field_log.enc | decrypt</span>
+          {/* Top-left — titre de section */}
+          <div className="absolute top-16 sm:top-20 left-4 sm:left-8 md:left-12 lg:left-16 z-20 font-mono">
+            <p className="text-[9px] sm:text-[10px] mb-1">
+              <span className="text-green-400">root@joelison:~$ </span>
+              <span className="text-white/50">cat /ops/field_log.enc | decrypt</span>
+            </p>
+            <h2
+              className="font-display font-black text-white leading-none tracking-tight"
+              style={{ fontSize: "clamp(1.2rem, 4.5vw, 2rem)" }}
+            >
+              PARCOURS<span className="text-white/40">_OPS/</span>
+            </h2>
           </div>
 
           {/* Top-right */}
@@ -758,9 +766,17 @@ export default function Experience() {
 
       {/* Mobile — liste empilée, scroll natif */}
       <div className="md:hidden px-4 py-16">
-        <div className="mb-6 font-mono text-[10px]">
-          <span className="text-green-400">root@joelison:~$ </span>
-          <span className="text-white/50">cat /ops/field_log.enc | decrypt</span>
+        <div className="mb-6">
+          <p className="font-mono text-[10px] mb-1">
+            <span className="text-green-400">root@joelison:~$ </span>
+            <span className="text-white/50">cat /ops/field_log.enc | decrypt</span>
+          </p>
+          <h2
+            className="font-display font-black text-white leading-none tracking-tight"
+            style={{ fontSize: "clamp(1.6rem, 8vw, 2.2rem)" }}
+          >
+            PARCOURS<span className="text-white/40">_OPS/</span>
+          </h2>
         </div>
 
         <div className="flex flex-col gap-4">
