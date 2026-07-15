@@ -24,9 +24,40 @@ type Mission = {
   details: string[];
   methodology: string[];
   outcomes: string[];
+  featured?: boolean;
 };
 
 const MISSIONS: Mission[] = [
+  {
+    id: "zerogap",
+    codename: "ZEROGAP_GRC_PLATFORM",
+    company: "DataProtect — Rabat",
+    period: "Nov 2025 — En cours",
+    status: "ACTIVE",
+    clearance: "L4",
+    port: "443/tcp",
+    role: "Stagiaire PFE — GRC Developer",
+    featured: true,
+    tags: ["React", "Node.js", "PostgreSQL", "Docker", "ISO 27001", "DNSSI", "Groq API", "IA Générative"],
+    brief: "Stage PFE au département GRC de DataProtect (Rabat). Conception et développement complet de ZeroGap, plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI, de l’analyse des besoins jusqu’à la documentation technique.",
+    details: [
+      "Système d’évaluation automatique de conformité et de maturité SMSI + tableaux de bord interactifs multi-profils",
+      "Workflow de validation des audits, plan d’action correctif et système d’alertes en temps réel",
+      "Intégration d’une reformulation automatique des contacts via l’API Groq (IA générative)",
+      "Architecture React · Node.js · PostgreSQL · Docker — cahier des charges, maquettes et doc technique",
+    ],
+    methodology: [
+      "Analyse des besoins métier avec les équipes GRC — élaboration du cahier des charges fonctionnel et technique",
+      "Conception UX/UI avec wireframes et maquettes Figma — validation itérative avec les auditeurs DataProtect",
+      "Développement Agile en sprints de 2 semaines — intégration continue et déploiement Docker",
+    ],
+    outcomes: [
+      "Plateforme couvrant 114 contrôles ISO 27001 et l’ensemble des exigences DNSSI marocaine",
+      "Réduction estimée à 60% du temps de préparation des audits de conformité pour les équipes GRC",
+      "Dashboard de maturité SMSI avec plans d’action correctifs, traçabilité et alertes temps réel",
+      "Reformulation IA des contacts (API Groq) — messages plus clairs et professionnels, générés en temps réel",
+    ],
+  },
   {
     id: "zero-trust",
     codename: "ZEROTRUST_MICROSEG",
@@ -52,33 +83,6 @@ const MISSIONS: Mission[] = [
       "Architecture périmétrique compromise en < 2 min — propagation latérale totale documentée avec preuves",
       "Architecture Zero Trust : blast radius confiné à 1 seul service, alertes SIEM déclenchées en < 30 secondes",
       "Rapport technique complet avec recommandations NIST SP 800-207 et matrice de risques comparée",
-    ],
-  },
-  {
-    id: "zerogap",
-    codename: "ZEROGAP_GRC_PLATFORM",
-    company: "DataProtect — Rabat",
-    period: "Nov 2025 — En cours",
-    status: "ACTIVE",
-    clearance: "L4",
-    port: "443/tcp",
-    role: "Stagiaire PFE — GRC Developer",
-    tags: ["React", "Node.js", "PostgreSQL", "Docker", "ISO 27001", "DNSSI"],
-    brief: "Stage PFE au département GRC de DataProtect (Rabat). Conception et développement complet de ZeroGap, plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI, de l’analyse des besoins jusqu’à la documentation technique.",
-    details: [
-      "Système d’évaluation automatique de conformité et de maturité SMSI + tableaux de bord interactifs multi-profils",
-      "Workflow de validation des audits, plan d’action correctif et système d’alertes en temps réel",
-      "Architecture React · Node.js · PostgreSQL · Docker — cahier des charges, maquettes et doc technique",
-    ],
-    methodology: [
-      "Analyse des besoins métier avec les équipes GRC — élaboration du cahier des charges fonctionnel et technique",
-      "Conception UX/UI avec wireframes et maquettes Figma — validation itérative avec les auditeurs DataProtect",
-      "Développement Agile en sprints de 2 semaines — intégration continue et déploiement Docker",
-    ],
-    outcomes: [
-      "Plateforme couvrant 114 contrôles ISO 27001 et l’ensemble des exigences DNSSI marocaine",
-      "Réduction estimée à 60% du temps de préparation des audits de conformité pour les équipes GRC",
-      "Dashboard de maturité SMSI avec plans d’action correctifs, traçabilité et alertes temps réel",
     ],
   },
   {
@@ -295,12 +299,19 @@ function MissionDetailModal({
           {/* Operation title */}
           <div>
             <div className="text-[7px] text-white/35 uppercase tracking-widest mb-1">OPERATION:</div>
-            <h2
-              className="font-display font-black text-white leading-none tracking-tight mb-2"
-              style={{ fontSize: "clamp(1.3rem, 3vw, 1.9rem)" }}
-            >
-              {mission.codename}
-            </h2>
+            <div className="flex items-center gap-3 flex-wrap mb-2">
+              <h2
+                className="font-display font-black text-white leading-none tracking-tight"
+                style={{ fontSize: "clamp(1.3rem, 3vw, 1.9rem)" }}
+              >
+                {mission.codename}
+              </h2>
+              {mission.featured && (
+                <span className="font-mono text-[7px] uppercase tracking-widest border border-green-400/70 text-green-400 px-1.5 py-0.5">
+                  &#9733; Featured
+                </span>
+              )}
+            </div>
             <div className="flex flex-wrap items-center gap-3 text-[8px] text-white/50">
               <span>PORT: {mission.port}</span>
               <span>&middot;</span>
@@ -480,12 +491,19 @@ function MissionSlide({
 
           {/* LEFT */}
           <div className="flex flex-col gap-5">
-            <motion.h3
-              style={{ opacity: headerOp, y: headerY, fontSize: "clamp(1.6rem, 4vw, 3.2rem)" }}
-              className="font-display font-black text-white leading-none tracking-tight"
-            >
-              {mission.codename}
-            </motion.h3>
+            <motion.div style={{ opacity: headerOp, y: headerY }} className="flex items-center gap-3 flex-wrap">
+              <h3
+                style={{ fontSize: "clamp(1.6rem, 4vw, 3.2rem)" }}
+                className="font-display font-black text-white leading-none tracking-tight"
+              >
+                {mission.codename}
+              </h3>
+              {mission.featured && (
+                <span className="font-mono text-[9px] uppercase tracking-widest border border-green-400/70 text-green-400 px-2 py-1">
+                  &#9733; Featured
+                </span>
+              )}
+            </motion.div>
 
             <div className="h-px bg-dim overflow-hidden">
               <motion.div style={{ scaleX: lineScale }} className="origin-left h-full bg-white" />

@@ -8,7 +8,6 @@ const IDENTITY = [
   ["NAME",        "JOELISON JOANNA VONINJOHARY"],
   ["STATUS",      "● ACTIVE — En recherche de premier CDI"],
   ["ROLE",        "Cybersecurity Engineer & Cloud Computing"],
-  ["INSTITUTION", "ISMAGI — 3e Année Cycle Ingénieur d'État"],
   ["LOCATION",    "Rabat, Maroc  [34.0209°N, 6.8417°W]"],
   ["EMAIL",       "joannajoelison.pro@gmail.com"],
   ["CLEARANCE",   "L4 — ELEVATED"],

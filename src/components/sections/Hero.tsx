@@ -141,7 +141,6 @@ export default function Hero() {
                   ["NAME",        "JOELISON JOANNA VONINJOHARY",             "text-white"],
                   ["STATUS",      "&#9679; ACTIVE",                          "text-white"],
                   ["ROLE",        "Cybersecurity Engineer & Cloud Computing", "text-white"],
-                  ["INSTITUTION", "ISMAGI — 3e Année Cycle Ingénieur",       "text-white"],
                   ["LOCATION",    "Rabat, Maroc  [34.0209°N, 6.8417°W]",    "text-white"],
                   ["AFFILIATION", "DataProtect · Neerelab Technology",        "text-white"],
                 ] as const).map(([key, val, cls]) => (

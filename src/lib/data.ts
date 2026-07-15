@@ -114,24 +114,6 @@ export const projects: Project[] = [
     featured: false,
     period: "Mars. 2025 — Mai. 2025",
   },
-  {
-    id: "app-re7",
-    title: "Application Re7 — Recettes Culinaires",
-    subtitle: "Android sécurisé · Firebase · Gestion des accès",
-    category: "Development",
-    description:
-      "Développement sécurisé d'une application collaborative de recettes culinaires 'Re7' en Java/Android. Gestion sécurisée des utilisateurs et des données via Firebase (Authentication, Firestore, règles d'accès). Contrôle des permissions pour garantir confidentialité et intégrité des recettes partagées.",
-    highlights: [
-      "Développement mobile Java/Android avec interface intuitive",
-      "Gestion sécurisée via Firebase — Authentication, Firestore, règles d'accès",
-      "Contrôle des permissions — confidentialité et intégrité des recettes",
-      "Optimisation de la base pour un accès rapide et sécurisé aux données partagées",
-    ],
-    stack: ["Android", "Java", "Firebase", "Firestore", "Android Studio"],
-    featured: false,
-    period: "Févr. 2024 — Mai. 2024",
-    company: "ISMAGI",
-  },
 ];
 
 export const skillGroups: SkillGroup[] = [
@@ -167,6 +149,17 @@ export const skillGroups: SkillGroup[] = [
 
 export const experiences: Experience[] = [
   {
+    id: "zerogap",
+    role: "Développeur Full-Stack — Plateforme GRC",
+    project: "ZeroGap Platform",
+    company: "DataProtect",
+    period: "Nov. 2025 — Mai. 2026",
+    current: false,
+    description:
+      "Conception et développement complet de ZeroGap au sein du département GRC de DataProtect (Rabat). Plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI avec évaluation automatique de maturité SMSI, tableaux de bord interactifs et workflow de validation des plans d'action. Intégration d'une reformulation automatique des contacts assistée par IA via l'API Groq.",
+    tags: ["React", "Node.js", "PostgreSQL", "Docker", "ISO 27001", "DNSSI", "GRC", "Groq API", "IA Générative"],
+  },
+  {
     id: "zero-trust",
     role: "Mission Freelance — Zero Trust & Micro-segmentation",
     project: "Architecture Zero Trust Lab",
@@ -176,17 +169,6 @@ export const experiences: Experience[] = [
     description:
       "Étude comparative entre une architecture périmétrique classique et une architecture Zero Trust déployée en laboratoire (Docker Compose, 14 services, 6 réseaux isolés). Conception du modèle PDP/PEP avec Nginx, Authelia et lldap (NIST SP 800-207), supervision Wazuh SIEM avec corrélation MITRE ATT&CK, et trois campagnes de pentest démontrant la compromission de l'architecture classique en moins de 2 minutes, contre un blast radius confiné sur l'architecture Zero Trust.",
     tags: ["Zero Trust", "Docker Compose", "Nginx", "Authelia", "lldap", "Wazuh", "NIST SP 800-207", "Pentest"],
-  },
-  {
-    id: "zerogap",
-    role: "Développeur Full-Stack — Plateforme GRC",
-    project: "ZeroGap Platform",
-    company: "DataProtect",
-    period: "Nov. 2025 — Mai. 2026",
-    current: false,
-    description:
-      "Conception et développement complet de ZeroGap au sein du département GRC de DataProtect (Rabat). Plateforme web de digitalisation des audits de conformité ISO 27001 et DNSSI avec évaluation automatique de maturité SMSI, tableaux de bord interactifs et workflow de validation des plans d'action.",
-    tags: ["React", "Node.js", "PostgreSQL", "Docker", "ISO 27001", "DNSSI", "GRC"],
   },
   {
     id: "flairie",
