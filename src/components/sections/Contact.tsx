@@ -233,9 +233,18 @@ export default function Contact({
                 <span className="text-green-400">$ </span>
                 <span className="text-white/50">ls -la /root/classified/ | grep cv</span>
               </div>
-              <button
+              <motion.button
                 onClick={() => onOpenCV?.()}
-                className="group w-full text-left border border-white/20 hover:border-white/50 transition-all duration-150 pointer-events-auto"
+                animate={{
+                  borderColor: ["rgba(74,222,128,0.25)", "rgba(74,222,128,0.9)", "rgba(74,222,128,0.25)"],
+                  boxShadow: [
+                    "0 0 0px rgba(74,222,128,0)",
+                    "0 0 12px rgba(74,222,128,0.35)",
+                    "0 0 0px rgba(74,222,128,0)",
+                  ],
+                }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="group w-full text-left border pointer-events-auto"
               >
                 <div className="flex items-center gap-3 px-4 py-2 border-b border-white/10 font-mono text-[9px]">
                   <span className="text-white">-rw-r--r--</span>
@@ -249,7 +258,7 @@ export default function Contact({
                     $ decrypt --key=sys &amp;&amp; open cv_joelison_joanna.pdf
                   </span>
                 </div>
-              </button>
+              </motion.button>
             </motion.div>
 
             {/* ── Exit terminal ── */}
@@ -298,7 +307,7 @@ export default function Contact({
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-white">
                 <div>END TRANSMISSION.</div>
                 <div className="text-right">
-                  <div>© 2025 JOELISON JOANNA VONINJOHARY</div>
+                  <div>© 2026 JOELISON JOANNA VONINJOHARY</div>
                   <div className="text-white">RABAT · MAROC · 34.02°N</div>
                 </div>
               </div>
@@ -351,9 +360,18 @@ export default function Contact({
             <span className="text-green-400">$ </span>
             <span className="text-white/50">ls -la /root/classified/ | grep cv</span>
           </div>
-          <button
+          <motion.button
             onClick={() => onOpenCV?.()}
-            className="group w-full text-left border border-white/20 active:border-white/50 transition-all duration-150"
+            animate={{
+              borderColor: ["rgba(74,222,128,0.25)", "rgba(74,222,128,0.9)", "rgba(74,222,128,0.25)"],
+              boxShadow: [
+                "0 0 0px rgba(74,222,128,0)",
+                "0 0 12px rgba(74,222,128,0.35)",
+                "0 0 0px rgba(74,222,128,0)",
+              ],
+            }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="group w-full text-left border"
           >
             <div className="flex items-center gap-3 px-4 py-2 border-b border-white/10 font-mono text-[9px] flex-wrap">
               <span className="text-white">-rw-r--r--</span>
@@ -367,7 +385,7 @@ export default function Contact({
                 $ decrypt --key=sys &amp;&amp; open cv_joelison_joanna.pdf
               </span>
             </div>
-          </button>
+          </motion.button>
         </div>
 
         {/* Exit terminal */}
@@ -405,7 +423,7 @@ export default function Contact({
         <div className="pt-3 border-t border-white/10 font-mono text-[8px]">
           <div className="flex flex-col gap-2 text-white">
             <div>END TRANSMISSION.</div>
-            <div>&copy; 2025 JOELISON JOANNA VONINJOHARY</div>
+            <div>&copy; 2026 JOELISON JOANNA VONINJOHARY</div>
             <div className="text-white">RABAT &middot; MAROC &middot; 34.02&deg;N</div>
           </div>
         </div>

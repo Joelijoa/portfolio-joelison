@@ -200,6 +200,18 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
   );
 }
 
+/* Ne bloque le scroll de la page que si le contenu interne est réellement
+   scrollable et pas encore en butée dans la direction demandée — sinon on
+   laisse l'événement remonter vers Lenis pour que la page continue de défiler. */
+function handleInnerWheel(e: React.WheelEvent<HTMLDivElement>) {
+  const el = e.currentTarget;
+  if (el.scrollHeight <= el.clientHeight) return;
+  const atTop    = el.scrollTop <= 0;
+  const atBottom = Math.ceil(el.scrollTop + el.clientHeight) >= el.scrollHeight;
+  if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) return;
+  e.stopPropagation();
+}
+
 /* ── Card ────────────────────────────────────────────────── */
 function OperationCard({ project, index, onOpen }: {
   project: Project;
@@ -217,7 +229,6 @@ function OperationCard({ project, index, onOpen }: {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="relative flex-shrink-0 w-[88vw] sm:w-[70vw] md:w-[55vw] lg:w-[44vw] xl:w-[38vw] border border-dim flex flex-col font-mono transition-colors duration-300 hover:border-white/50 bg-black overflow-hidden"
-      style={{ height: "clamp(360px, 62vh, 580px)" }}
     >
       {/* File header */}
       <div className="border-b border-dim px-4 sm:px-7 py-3 sm:py-4 flex items-center justify-between shrink-0">
@@ -244,8 +255,7 @@ function OperationCard({ project, index, onOpen }: {
       {/* Body */}
       <div
         className="flex-1 px-4 sm:px-7 py-4 sm:py-6 flex flex-col gap-3 sm:gap-5 overflow-y-auto overscroll-contain"
-        onWheel={(e) => e.stopPropagation()}
-        onTouchMove={(e) => e.stopPropagation()}
+        onWheel={handleInnerWheel}
       >
         <div>
           <div className="text-[9px] text-white uppercase tracking-widest mb-1">Operation:</div>
@@ -258,7 +268,7 @@ function OperationCard({ project, index, onOpen }: {
           <p className="text-[10px] text-white mt-1">{project.subtitle}</p>
         </div>
 
-        <div className="flex-1">
+        <div>
           <div className="text-[9px] text-white uppercase tracking-widest mb-2">Mission Brief:</div>
           <p className="text-[11px] text-white leading-relaxed line-clamp-4">
             {project.description}
@@ -456,7 +466,7 @@ export default function Projects() {
           {/* Header */}
           <motion.div
             style={{ opacity: headerOpacity, y: headerY }}
-            className="px-4 sm:px-6 md:px-12 pt-16 sm:pt-20 md:pt-16 mb-4 sm:mb-5 shrink-0"
+            className="px-4 sm:px-6 md:px-12 pt-20 sm:pt-24 md:pt-24 mb-4 sm:mb-5 shrink-0"
           >
             <div className="flex items-end justify-between">
               <div>

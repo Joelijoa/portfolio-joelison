@@ -1,13 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function BinaryRain({ dim = false }: { dim?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dimRef    = useRef(dim);
   dimRef.current  = dim;
 
+  /* Ne monte le <canvas> qu'après hydratation : certaines extensions
+     (bloqueurs anti-fingerprinting) suppriment les canvas côté client,
+     ce qui provoque un mismatch d'hydratation si le canvas est rendu SSR. */
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   useEffect(() => {
+    if (!mounted) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -27,8 +34,13 @@ export default function BinaryRain({ dim = false }: { dim?: boolean }) {
     window.addEventListener("resize", init);
 
     let raf: number;
-    const draw = () => {
+    let last = 0;
+    const FPS = 20; // vitesse de chute réduite (par défaut le rAF tourne ~60fps)
+    const interval = 1000 / FPS;
+    const draw = (time: number) => {
       raf = requestAnimationFrame(draw);
+      if (time - last < interval) return;
+      last = time;
       const isDim = dimRef.current;
       ctx.font = `${FS}px "JetBrains Mono", monospace`;
 
@@ -62,7 +74,9 @@ export default function BinaryRain({ dim = false }: { dim?: boolean }) {
 
     raf = requestAnimationFrame(draw);
     return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", init); };
-  }, []);
+  }, [mounted]);
+
+  if (!mounted) return null;
 
   return (
     <canvas
